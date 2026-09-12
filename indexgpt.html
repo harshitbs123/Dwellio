@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dwellio | Places worth staying in</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #202323;
+        --muted: #727978;
+        --paper: #f6f6f3;
+        --line: #dedfdb;
+        --coral: #e86f51;
+        --soft-coral: #fff0eb;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "DM Sans", sans-serif;
+      }
+      button, input { font: inherit; }
+      button { cursor: pointer; }
+      .shell { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+      .brand { color: var(--ink); font-size: 1.25rem; font-weight: 700; letter-spacing: -0.04em; }
+      .brand-mark { color: var(--coral); font-family: "Playfair Display", serif; font-size: 1.7rem; font-style: italic; }
+      .topbar { align-items: center; display: flex; height: 86px; justify-content: space-between; }
+      .nav-links { display: flex; gap: 30px; margin-left: 80px; }
+      .nav-links a { color: var(--muted); font-size: .9rem; text-decoration: none; }
+      .nav-links a:first-child, .nav-links a:hover { color: var(--ink); font-weight: 600; }
+      .actions { align-items: center; display: flex; gap: 18px; }
+      .host-link { color: var(--ink); font-size: .9rem; font-weight: 600; text-decoration: none; }
+      .icon-button { background: transparent; border: 1px solid var(--line); border-radius: 50%; color: var(--ink); height: 40px; width: 40px; }
+      .menu-button { align-items: center; background: var(--ink); border: 0; border-radius: 22px; color: white; display: flex; gap: 10px; padding: 10px 14px; }
+      .menu-button span { font-size: .82rem; }
+      .hero { padding: 54px 0 46px; }
+      .eyebrow { color: var(--coral); font-size: .74rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+      h1 { font-family: "Playfair Display", serif; font-size: clamp(3rem, 6vw, 5.5rem); letter-spacing: -.055em; line-height: .98; margin: 14px 0 18px; max-width: 740px; }
+      .hero-copy { color: var(--muted); font-size: 1.05rem; line-height: 1.6; margin: 0 0 30px; max-width: 520px; }
+      .search-panel { align-items: center; background: white; border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 14px 30px rgba(32,35,35,.07); display: grid; grid-template-columns: 1.4fr 1fr 1fr auto; max-width: 970px; padding: 8px; }
+      .search-field { border-right: 1px solid var(--line); display: flex; flex-direction: column; gap: 3px; min-height: 54px; justify-content: center; padding: 0 20px; }
+      .search-field label { color: var(--muted); font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+      .search-field input { background: transparent; border: 0; color: var(--ink); font-size: .92rem; outline: 0; padding: 0; width: 100%; }
+      .search-button { background: var(--coral); border: 0; border-radius: 8px; color: white; font-size: .88rem; font-weight: 700; margin-left: 8px; padding: 17px 22px; }
+      .search-button:hover { background: #d95f43; }
+      .section-heading { align-items: end; display: flex; justify-content: space-between; margin-bottom: 20px; }
+      h2 { font-family: "Playfair Display", serif; font-size: 2rem; letter-spacing: -.04em; margin: 0; }
+      .section-heading a { color: var(--coral); font-size: .86rem; font-weight: 700; text-decoration: none; }
+      .listing-grid { display: grid; gap: 20px; grid-template-columns: repeat(3, 1fr); padding-bottom: 72px; }
+      .listing { min-width: 0; }
+      .image-wrap { aspect-ratio: 1.18; border-radius: 10px; overflow: hidden; position: relative; }
+      .image-wrap img { height: 100%; object-fit: cover; transition: transform .45s ease; width: 100%; }
+      .listing:hover img { transform: scale(1.04); }
+      .save-button { background: rgba(255,255,255,.9); border: 0; border-radius: 50%; color: var(--ink); height: 34px; position: absolute; right: 12px; top: 12px; width: 34px; }
+      .tag { background: white; border-radius: 4px; bottom: 12px; color: var(--ink); font-size: .68rem; font-weight: 700; left: 12px; padding: 6px 9px; position: absolute; text-transform: uppercase; }
+      .listing-info { padding-top: 13px; }
+      .listing-title { font-size: .98rem; font-weight: 700; margin: 0 0 5px; }
+      .listing-location { color: var(--muted); font-size: .83rem; margin: 0 0 10px; }
+      .price { font-size: .9rem; font-weight: 700; }
+      .price span { color: var(--muted); font-weight: 400; }
+      .trust-strip { background: var(--ink); color: white; }
+      .trust-inner { align-items: center; display: flex; justify-content: space-between; padding-bottom: 25px; padding-top: 25px; }
+      .trust-inner p { color: #c6ccca; font-size: .86rem; margin: 0; }
+      .stats { display: flex; gap: 42px; }
+      .stat strong { display: block; font-family: "Playfair Display", serif; font-size: 1.5rem; }
+      .stat span { color: #aab2af; font-size: .7rem; text-transform: uppercase; }
+      @media (max-width: 760px) {
+        .shell { padding: 0 20px; }
+        .topbar { height: 72px; }
+        .nav-links, .host-link, .icon-button { display: none; }
+        .hero { padding: 42px 0 38px; }
+        h1 { font-size: 3.4rem; }
+        .search-panel { display: block; padding: 8px; }
+        .search-field { border-bottom: 1px solid var(--line); border-right: 0; padding: 12px; }
+        .search-button { margin: 8px 0 0; width: 100%; }
+        .listing-grid { grid-template-columns: 1fr; }
+        .image-wrap { aspect-ratio: 1.45; }
+        .trust-inner { align-items: start; flex-direction: column; gap: 20px; }
+        .stats { gap: 28px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="shell topbar">
+      <a class="brand" href="#"><span class="brand-mark">D</span>wellio</a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#stays">Explore stays</a>
+        <a href="#collections">Collections</a>
+        <a href="#about">About us</a>
+      </nav>
+      <div class="actions">
+        <a class="host-link" href="#host">Become a host</a>
+        <button class="icon-button" aria-label="Change language"><i class="fa-solid fa-globe"></i></button>
+        <button class="menu-button" aria-label="Open menu"><i class="fa-solid fa-bars"></i><span>Menu</span></button>
+      </div>
+    </header>
+
+    <main>
+      <section class="shell hero" id="collections">
+        <span class="eyebrow">Thoughtfully chosen stays</span>
+        <h1>Find a place that feels like yours.</h1>
+        <p class="hero-copy">From quiet coastal escapes to city apartments with a view, discover spaces made for the way you want to travel.</p>
+        <form class="search-panel" role="search">
+          <div class="search-field"><label for="destination">Where</label><input id="destination" placeholder="Search destinations" /></div>
+          <div class="search-field"><label for="check-in">Check in</label><input id="check-in" placeholder="Add dates" /></div>
+          <div class="search-field"><label for="guests">Guests</label><input id="guests" placeholder="Add guests" /></div>
+          <button class="search-button" type="submit"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+        </form>
+      </section>
+
+      <section class="shell" id="stays">
+        <div class="section-heading"><h2>Stays worth slowing down for</h2><a href="#all-stays">View all <i class="fa-solid fa-arrow-right"></i></a></div>
+        <div class="listing-grid">
+          <article class="listing"><div class="image-wrap"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=85" alt="Sunlit modern villa interior" /><button class="save-button" aria-label="Save villa"><i class="fa-regular fa-heart"></i></button><span class="tag">Guest favourite</span></div><div class="listing-info"><h3 class="listing-title">Casa Sol · a light-filled retreat</h3><p class="listing-location">Alibaug, Maharashtra</p><div class="price">₹13,500 <span>night</span></div></div></article>
+          <article class="listing"><div class="image-wrap"><img src="https://images.unsplash.com/photo-1601918774946-25832a4be0d6?auto=format&fit=crop&w=900&q=85" alt="Minimal bedroom with a mountain view" /><button class="save-button" aria-label="Save apartment"><i class="fa-regular fa-heart"></i></button><span class="tag">New on Dwellio</span></div><div class="listing-info"><h3 class="listing-title">The Cedar House · mountain air</h3><p class="listing-location">Manali, Himachal Pradesh</p><div class="price">₹8,900 <span>night</span></div></div></article>
+          <article class="listing"><div class="image-wrap"><img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=900&q=85" alt="Aerial view of a quiet beach villa" /><button class="save-button" aria-label="Save beach house"><i class="fa-regular fa-heart"></i></button><span class="tag">Best for couples</span></div><div class="listing-info"><h3 class="listing-title">Tide House · steps from the sea</h3><p class="listing-location">Varkala, Kerala</p><div class="price">₹11,200 <span>night</span></div></div></article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="trust-strip" id="about">
+      <div class="shell trust-inner"><p>Good spaces, memorable stays, and a little more room to breathe.</p><div class="stats"><div class="stat"><strong>4.9/5</strong><span>Average rating</span></div><div class="stat"><strong>12k+</strong><span>Places to stay</span></div><div class="stat"><strong>24/7</strong><span>Guest support</span></div></div></div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dwellio</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
+  <body class="bg-zinc-900">
+    <style>
+      @font-face {
+        font-family: "stardom";
+        src: url("./assets/fonts/Stardom-Regular.otf") format("opentype");
+      }
+      .stardom-font {
+        font-family: "stardom", sans-serif;
+      }
+      /* zodiac */
+      @font-face {
+        font-family: "zodiac";
+        src: url("./assets/fonts/Zodiak-Thin.otf") format("opentype");
+        font-weight: 100;
+      }
+
+      @font-face {
+        font-family: "zodiac";
+        src: url("./assets/fonts/Zodiak-Light.otf") format("opentype");
+        font-weight: 300;
+      }
+
+      @font-face {
+        font-family: "zodiac";
+        src: url("./assets/fonts/Zodiak-Regular.otf") format("opentype");
+        font-weight: 400;
+      }
+
+      @font-face {
+        font-family: "zodiac";
+        src: url("./assets/fonts/Zodiak-Bold.otf") format("opentype");
+        font-weight: 700;
+      }
+
+      @font-face {
+        font-family: "zodiac";
+        src: url("./assets/fonts/Zodiak-Extrabold.otf") format("opentype");
+        font-weight: 800;
+      }
+      .zodiac-font {
+        font-family: "zodiac", sans-serif;
+      }
+    </style>
+
+    <div class="bg-black p-5 zodiac-font font-light">
+      <nav
+        class="flex justify-between items-center p-4 rounded-full bg-gradient-to-r from-pink-400 to-red-300"
+      >
+        <div class="flex-1">
+          <span class="text-white bg-black px-4 py-2 rounded-xl">
+            <i class="text-[#d9659a] text-2xl stardom-font">D</i>wellio
+          </span>
+        </div>
+        <div
+          class="flex flex-1 justify-center text-white border p-4 rounded-full bg-red-800/10 backdrop-blur-sm border border-white/40"
+        >
+          <div class="mx-4">All</div>
+          <div class="mx-4">Homes</div>
+          <div class="mx-4">Resorts</div>
+          <div class="mx-4">Host</div>
+        </div>
+        <div class="flex items-center flex-1 justify-end text-white">
+          <div
+            class="mx-4 border p-2 px-3 rounded-full bg-red-800/10 backdrop-blur-sm border border-white/40"
+          >
+            <span> Become a host </span>
+          </div>
+          <div class="mx-2 p-3 rounded-full bg-black">
+            <i class="fa-solid fa-globe text-[#d9659a]"></i>
+          </div>
+          <div class="mx-2 p-3 rounded-full bg-black">
+            <i class="fa-solid fa-bars-staggered text-[#d9659a]"></i>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <!-- content -->
+    <div class="content w-[80%] mx-auto text-white">
+      <div class="listingsheading mt-5">
+        <h1 class="zodiac-font text-4xl font-light">
+          All Listings on
+          <span
+            class="stardom-font ( bg-gradient-to-r from-pink-500 to-red-400 ) px-2 rounded-xl hover:"
+            ><i>D</i>wellio</span
+          >
+        </h1>
+      </div>
+      <!-- hotels -->
+      <div class="grid grid-cols-3 mt-10 ">
+        <div class="border m-4 p-3 rounded-xl bg-pink-300/10 hover:bg-red-400/10 transition duration-300 ">
+            <div class="img"><img src="./assets/new-camp-della-exterior-v4.webp" alt="" class="rounded-2xl"></div>
+            <div class="data mt-2">
+                <h1 class="title stardom-font text-2xl ">Della Resorts</h1>
+                <h1 class="description zodiac-font font-thin text-xs my-2">Elevate your escape at our guest favourite for the last 12 years, Camp Della Resort in Lonavala. We are the first to introduce the “glamping concept” in the country with our luxurious fully air-conditioned tent style rooms, where every moment is a scenic escape on the hills. Your perfect getaway awaits!</h1>
+                <h1 class="location  zodiac-font font-light text-sm my-2">Della Resorts, Kunegaon, Khandala, Lonavala, Kune N.m., Maharashtra 410401</h1>
+                <h1 class="country  zodiac-font font-bold text-xl my-2">India</h1>
+            </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

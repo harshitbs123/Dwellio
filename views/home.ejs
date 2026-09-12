@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dwellio</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <link rel="icon" type="image/png" href="/favicon.png" class="rounded-2xl">
+  </head>
+  <body class="bg-black">
+    <style>
+      /* zodiac */
+      @font-face {
+        font-family: "zodiac";
+        src: url("./assets/fonts/Zodiak-Thin.otf") format("opentype");
+        font-weight: 100;
+      }
+
+      @font-face {
+        font-family: "zodiac";
+        src: url("./assets/fonts/Zodiak-Light.otf") format("opentype");
+        font-weight: 300;
+      }
+
+      @font-face {
+        font-family: "zodiac";
+        src: url("./assets/fonts/Zodiak-Regular.otf") format("opentype");
+        font-weight: 400;
+      }
+
+      @font-face {
+        font-family: "zodiac";
+        src: url("./assets/fonts/Zodiak-Bold.otf") format("opentype");
+        font-weight: 700;
+      }
+
+      @font-face {
+        font-family: "zodiac";
+        src: url("./assets/fonts/Zodiak-Extrabold.otf") format("opentype");
+        font-weight: 800;
+      }
+      .zodiac-font {
+        font-family: "zodiac", sans-serif;
+      }
+    </style>
+
+    <div class="bg-black p-5 zodiac-font font-light">
+      <nav
+        class="flex justify-between mx-10 items-center p-4 rounded-full bg-gradient-to-br from-pink-500 via-rose-400 to-red-300"
+      >
+        <div class="flex-1 mx-5">
+          <a href="/listings">
+            <span class="text-white bg-black px-4 py-2 rounded-xl">
+              <i class="text-[#d9659a] text-2xl">D</i>wellio
+            </span>
+          </a>
+        </div>
+        <div
+          class="flex flex-1 justify-center text-sm text-white border p-4 rounded-full bg-red-800/10 backdrop-blur-sm border border-white/40"
+        >
+          <div class="mx-4">
+            <a href="/listings">All</a></div>
+          <div class="mx-4">Homes</div>
+          <div class="mx-4">Resorts</div>
+          <div class="mx-4">
+            <a href="/listings/host">Host</a></div>
+        </div>
+        <div class="flex items-center flex-1 justify-end text-white">
+          <div
+            class="mx-4 border p-2 px-3 text-sm rounded-full bg-red-800/10 backdrop-blur-sm border border-white/40"
+          >
+          <a href="/listings/host"><span> Become a host </span></a>
+          </div>
+          <div class="mx-2 p-3 rounded-full bg-black h-10 w-10 flex items-center justify-center">
+            <i class="fa-solid fa-globe text-[#d9659a]"></i>
+          </div>
+          <div class="mx-2 p-3 rounded-full bg-black h-10 w-10 flex items-center justify-center">
+            <i class="fa-solid fa-bars-staggered text-[#d9659a]"></i>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <!-- content -->
+    <div class="content w-[80%] mx-auto text-white">
+      <div class="listingsheading mt-5">
+        <h1 class="zodiac-font text-4xl font-light">
+          All Listings on
+          <span
+            class="stardom-font ( bg-gradient-to-r from-pink-500 to-red-400 ) px-2 rounded-xl font-thin"
+            ><i class="font-bold">D</i>wellio..</span
+          >
+        </h1>
+      </div>
+      <!-- hotels -->
+      <div class="grid grid-cols-3 mt-10">
+        <% for (let Listing of Listings){ %>
+          <a href="/listings/<%=Listing._id%>">
+            <div
+          class="relative m-4 p-3 rounded-xl bg-pink-300/10 hover:bg-red-400/10 transition duration-300"
+        >
+          <div class="img">
+            <img
+              src="<%=Listing.image%>"
+              alt=""
+              class="rounded-2xl"
+            />
+          </div>
+          <div class="data mt-2">
+            <h1 class="title stardom-font text-2xl bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent"><%=Listing.title%></h1>
+            <h1 class="description zodiac-font font-thin text-xs my-2">
+              <%=Listing.description%>
+            </h1>
+            <h1 class="location zodiac-font font-light text-sm my-2">
+              <%=Listing.location%>
+            </h1>
+            <h1 class="country zodiac-font font-bold text-xl my-2"><%=Listing.country%></h1>
+          </div>
+          <div class="absolute bottom-4 right-4"><span class="px-3 py-1 text-lg rounded-xl bg-black">
+  <span class="bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent">
+    ₹<%= Listing.price.toLocaleString("en-IN") %>
+  </span>
+</span></div>
+        </div>
+        </a>
+       <% } %>
+      </div>
+    </div>
+
+    <footer class="mt-20 bg-gradient-to-br from-pink-500 via-rose-400 to-red-300 text-white" id="about">
+      <div class="mx-auto grid w-[80%] gap-10 py-12 md:grid-cols-[1.4fr_1fr] md:items-end">
+        <div>
+          <p class="stardom-font text-3xl font-light tracking-wide">
+            <span class="border bg-white rounded-2xl px-3 py-1">
+                <span class="bg-gradient-to-r  from-pink-500 to-red-500 bg-clip-text text-transparent">
+             <i class="font-bold">D</i>wellio
+            </span>
+            </span>
+          </p>
+          <p class="zodiac-font mt-8 text-xs text-white/70">
+             2026 Dwellio. All rights reserved.
+          </p>
+        </div>
+        <div class="grid grid-cols-3 gap-4 text-center">
+          <div class="rounded-2xl border border-white/30 bg-white/15 p-4 backdrop-blur-sm">
+            <strong class="stardom-font block text-2xl">4.9/5</strong>
+            <span class="zodiac-font mt-1 block text-xs text-white/75">Average rating</span>
+          </div>
+          <div class="rounded-2xl border border-white/30 bg-white/15 p-4 backdrop-blur-sm">
+            <strong class="stardom-font block text-2xl">12k+</strong>
+            <span class="zodiac-font mt-1 block text-xs text-white/75">Places to stay</span>
+          </div>
+          <div class="rounded-2xl border border-white/30 bg-white/15 p-4 backdrop-blur-sm">
+            <strong class="stardom-font block text-2xl">24/7</strong>
+            <span class="zodiac-font mt-1 block text-xs text-white/75">Guest support</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
