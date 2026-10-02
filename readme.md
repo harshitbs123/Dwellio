@@ -17,6 +17,12 @@ Users can browse available properties, view individual listings, while hosts can
 * 🔄 RESTful CRUD operations
 * 📱 Responsive UI
 * 🖼️ Property images and listing information
+* 🛡️ Centralized error handling
+* 🔄 Async error handling with `wrapAsync`
+* ⚠️ Custom `ExpressError` class
+* 🚫 Custom 404 page
+* 🔎 Listing not found handling
+* ❌ Invalid MongoDB ObjectId / CastError handling
 
 ## 🛠️ Tech Stack
 
@@ -41,6 +47,10 @@ Users can browse available properties, view individual listings, while hosts can
 
 * Method Override
 * REST APIs
+* Custom Error Handling
+* Express Middleware
+* wrapAsync
+* ExpressError
 
 ## 📂 Project Structure
 
@@ -55,6 +65,12 @@ Dwellio/
 │   ├── show.ejs
 │   ├── host.ejs
 │   └── edit.ejs
+│   └── 404.ejs
+│   └── 404Cast.ejs
+│
+├── utils/
+│   ├── ExpressError.js
+│   └── wrapAsync.js
 │
 ├── assets/
 │   └── images/
@@ -170,6 +186,11 @@ This project helped me understand:
 * Express middleware
 * Dynamic routes
 * Server-side rendering
+* Error handling in Express
+* Custom error classes
+* Async error handling with wrapAsync
+* 404 error handling
+* Mongoose CastError handling
 
 ## 🔮 Future Improvements
 
