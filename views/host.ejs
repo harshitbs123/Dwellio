@@ -110,7 +110,7 @@
           <form action="/listings" method="POST">
             <div class="title">
               <h1
-                class="mb-4 text-xl bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent"
+                class="mb-4 text-xl font-semibold bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent"
               >
                 Title
               </h1>
@@ -119,12 +119,13 @@
                 name="listing[title]"
                 placeholder="Add a catchy title"
                 id=""
+                required
                 class="border w-full h-10 rounded-3xl px-5 py-3 bg-gradient-to-r from-pink-500/10 to-red-500/10"
               />
             </div>
             <div class="description mt-5">
               <h1
-                class="mb-4 text-xl bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent"
+                class="mb-4 font-semibold text-xl bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent"
               >
                 Description :
               </h1>
@@ -132,6 +133,7 @@
                 type="text"
                 name="listing[description]"
                 id=""
+                required
                 placeholder="Tell us about your property"
                 class="border w-100 rounded-3xl px-5 py-3 bg-gradient-to-r from-pink-500/10 to-red-500/10"
                 rows="4"
@@ -139,7 +141,7 @@
             </div>
             <div class="image_url mt-5">
               <h1
-                class="mb-4 text-xl bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent"
+                class="mb-4 font-semibold text-xl bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent"
               >
                 Hotel Image URL :
               </h1>
@@ -153,7 +155,7 @@
             </div>
             <div class="location mt-5">
               <h1
-                class="mb-4 text-xl bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent"
+                class="mb-4 text-xl font-semibold bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent"
               >
                 Location :
               </h1>
@@ -161,13 +163,14 @@
                 type="text"
                 name="listing[location]"
                 id=""
+                required
                 placeholder="Where is it located"
                 class="border w-100 h-10 rounded-3xl px-5 py-3 bg-gradient-to-r from-pink-500/10 to-red-500/10"
               />
             </div>
             <div class="country mt-5">
               <h1
-                class="mb-4 text-xl bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent"
+                class="mb-4 text-xl font-semibold bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent"
               >
                 Country :
               </h1>
@@ -175,20 +178,22 @@
                 type="text"
                 name="listing[country]"
                 id=""
+                required
                 placeholder="Enter Country"
                 class="border w-100 h-10 rounded-3xl px-5 py-3 bg-gradient-to-r from-pink-500/10 to-red-500/10"
               />
             </div>
             <div class="price mt-5">
               <h1
-                class="mb-4 text-xl bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent"
+                class="mb-4 text-xl font-semibold bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent"
               >
                 Hotel Price :
               </h1>
               <input
-                type="number"
+                type="text"
                 name="listing[price]"
                 id=""
+                required
                 placeholder="How much for a night"
                 class="border w-100 h-10 rounded-3xl px-5 py-3 bg-gradient-to-r from-pink-500/10 to-red-500/10"
               />
