@@ -74,11 +74,15 @@ app.get("/listings/:id", async (req, res) => {
 });
 
 //update
-app.get("/listings/:id/edit", async (req, res) => {
+app.get("/listings/:id/edit", async (req, res, next) => {
   let { id } = req.params;
   const listing = await List.findById(id);
+  if (!listing) {
+    return next(new ExpressError(404, "Listing not found"));
+  }
   res.render("edit.ejs", { listing });
 });
+
 app.patch("/listings/:id", async (req, res) => {
   let { id } = req.params;
   await List.findByIdAndUpdate(id, req.body.listing);
@@ -93,23 +97,20 @@ app.delete("/listings/:id", async (req, res) => {
 });
 
 // all
-app.all("/{*splat}" , (req,res,next)=>{
-  next(new ExpressError(404,"Page Not Found!"))
-})
+app.all("/{*splat}", (req, res, next) => {
+  next(new ExpressError(404, "Page Not Found!"));
+});
 
 // err handling middle-ware
 
 app.use((err, req, res, next) => {
-  let status = err.status;
-  let message = err.message;
-
+  let { status = 500, message = "Something went wrong!" } = err;
+  if (err.name === "CastError") {
+    return res.status(404).render("404Cast.ejs");
+  }
   if (status === 404) {
     return res.status(404).render("404.ejs");
   } else {
     return res.status(status).send(message);
   }
 });
-
-
-
-
