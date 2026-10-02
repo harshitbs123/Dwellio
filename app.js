@@ -70,9 +70,6 @@ app.post(
 app.get("/listings/:id", async (req, res, next) => {
   let { id } = req.params;
   const Listing = await List.findById(id);
-  if (!listing) {
-    return next(new ExpressError(404, "Listing not found"));
-  }
   res.render("show.ejs", { Listing });
 });
 
