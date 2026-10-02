@@ -67,19 +67,19 @@ app.post(
 );
 
 //Show Route
-app.get("/listings/:id", async (req, res) => {
+app.get("/listings/:id", async (req, res, next) => {
   let { id } = req.params;
   const Listing = await List.findById(id);
+  if (!listing) {
+    return next(new ExpressError(404, "Listing not found"));
+  }
   res.render("show.ejs", { Listing });
 });
 
 //update
-app.get("/listings/:id/edit", async (req, res, next) => {
+app.get("/listings/:id/edit", async (req, res) => {
   let { id } = req.params;
   const listing = await List.findById(id);
-  if (!listing) {
-    return next(new ExpressError(404, "Listing not found"));
-  }
   res.render("edit.ejs", { listing });
 });
 
