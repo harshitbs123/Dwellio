@@ -104,7 +104,7 @@ app.post(
   "/listings/:id/reviews",
   wrapAsync(async (req, res, next) => {
     const { id } = req.params;
-    const listing = await Listing.findById(id);
+    const listing = await List.findById(id).populate("reviews");
 
     if (!listing) {
       return next(new ExpressError(404, "Listing Not Found"));
@@ -125,7 +125,7 @@ app.get(
   "/listings/:id",
   wrapAsync(async (req, res, next) => {
     let { id } = req.params;
-    const listing = await Listing.findById(id);
+    const listing = await Listing.findById(id).populate("reviews");
     if (!listing) {
       return next(new ExpressError(404, "Listing Not Found"));
     }
