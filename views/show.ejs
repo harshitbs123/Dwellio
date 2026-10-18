@@ -1,9 +1,10 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <%- include("includes/head.ejs", { title: listing.title }) %>
+    <%- include("includes/head.ejs", { title: (typeof Listing !== 'undefined' && Listing ? Listing.title : 'Stay Details') }) %>
   </head>
   <body class="bg-[#030305] text-white selection:bg-pink-500 selection:text-white">
+    <% const currentListing = typeof Listing !== 'undefined' && Listing ? Listing : (typeof listing !== 'undefined' && listing ? listing : {}); var Listing = currentListing; var listing = currentListing; %>
     <%- include("includes/navbar.ejs") %>
 
     <div class="relative overflow-hidden min-h-screen">

@@ -1,79 +1,84 @@
-<!-- Minimal Glassy Vice City Neon Navbar -->
-<header class="sticky top-0 z-50 p-2.5 sm:p-4 backdrop-blur-xl bg-black/40 border-b border-white/[0.04] transition-all duration-300">
+<!-- Sleek, Minimal, Luxury Vice City Navbar -->
+<header class="sticky top-0 z-50 py-2 sm:py-2.5 px-3 sm:px-6 backdrop-blur-xl bg-black/40 border-b border-white/[0.04] transition-all duration-300">
   <nav
-    class="max-w-6xl mx-auto px-4 sm:px-6 py-2 rounded-full bg-zinc-950/50 backdrop-blur-2xl border border-pink-500/25 shadow-[0_8px_32px_0_rgba(255,42,133,0.12)] flex items-center justify-between"
+    class="max-w-5xl mx-auto px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-[#08080c]/80 backdrop-blur-2xl border border-white/[0.08] hover:border-pink-500/25 shadow-[0_4px_24px_rgba(0,0,0,0.6),0_0_15px_rgba(255,42,133,0.08)] flex items-center justify-between transition-all duration-300"
   >
-    <!-- Brand Logo Capsule -->
-    <a href="/" class="flex items-center gap-2.5 group flex-shrink-0">
-      <div
-        class="w-8 h-8 rounded-full bg-gradient-to-br from-pink-500/20 to-rose-500/10 border border-pink-500/40 flex items-center justify-center text-pink-400 group-hover:scale-105 group-hover:border-pink-400 group-hover:shadow-[0_0_18px_rgba(255,42,133,0.6)] transition-all duration-300"
-      >
-        <i class="stardom-font text-xl not-italic text-pink-400 font-bold leading-none">D</i>
-      </div>
-      <span class="zodiac-font text-lg text-white font-light tracking-wide group-hover:text-pink-200 transition">wellio</span>
-    </a>
+    <!-- Left: Sleek Glowing Vice City Logo -->
+    <div class="flex-shrink-0 flex items-center">
+      <a href="/" class="flex items-center group py-0.5">
+        <img
+          src="/logo.png"
+          alt="Dwellio"
+          class="h-7 sm:h-8 w-auto object-contain mix-blend-screen filter drop-shadow-[2px_2px_15px_rgba(255,42,133,0.6)] group-hover:scale-105 transition-all duration-200"
+          onerror="this.style.display='none'; document.getElementById('textLogo').classList.remove('hidden');"
+        />
+        <span id="textLogo" class="hidden items-center text-white tracking-tight font-medium text-base">
+          <i class="text-[#ff2a85] text-xl stardom-font not-italic mr-0.5">D</i><span class="zodiac-font">wellio</span>
+        </span>
+      </a>
+    </div>
 
-    <!-- Center Navigation Links (Minimal Glass Capsule) -->
+    <!-- Center: Minimal Clean Navigation Links -->
     <div
-      class="hidden md:flex items-center space-x-1 p-1 rounded-full bg-white/[0.03] border border-white/[0.07] backdrop-blur-md"
+      class="hidden md:flex items-center space-x-6 text-xs zodiac-font font-light tracking-wide text-zinc-300"
     >
       <a
         href="/"
-        class="px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide transition duration-200 <%= (typeof active !== 'undefined' && active === 'home') ? 'bg-pink-500/20 text-pink-300 border border-pink-500/40 shadow-[0_0_12px_rgba(255,42,133,0.3)]' : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]' %>"
+        class="transition hover:text-pink-300 <%= (typeof active !== 'undefined' && active === 'home') ? 'text-pink-400 font-semibold' : 'hover:text-white' %>"
       >
         Home
       </a>
       <a
         href="/listings"
-        class="px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide transition duration-200 <%= (typeof active !== 'undefined' && active === 'listings') ? 'bg-pink-500/20 text-pink-300 border border-pink-500/40 shadow-[0_0_12px_rgba(255,42,133,0.3)]' : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]' %>"
+        class="transition hover:text-pink-300 <%= (typeof active !== 'undefined' && active === 'listings') ? 'text-pink-400 font-semibold' : 'hover:text-white' %>"
       >
         All Stays
       </a>
       <a
         href="/listings?search=Villa"
-        class="px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide transition duration-200 <%= (typeof active !== 'undefined' && active === 'villas') ? 'bg-pink-500/20 text-pink-300 border border-pink-500/40 shadow-[0_0_12px_rgba(255,42,133,0.3)]' : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]' %>"
+        class="transition hover:text-pink-300 <%= (typeof active !== 'undefined' && active === 'villas') ? 'text-pink-400 font-semibold' : 'hover:text-white' %>"
       >
         Villas
       </a>
       <a
         href="/listings?search=Resort"
-        class="px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide transition duration-200 <%= (typeof active !== 'undefined' && active === 'beachfront') ? 'bg-pink-500/20 text-pink-300 border border-pink-500/40 shadow-[0_0_12px_rgba(255,42,133,0.3)]' : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]' %>"
+        class="transition hover:text-pink-300 <%= (typeof active !== 'undefined' && active === 'beachfront') ? 'text-pink-400 font-semibold' : 'hover:text-white' %>"
       >
         Resorts
       </a>
       <a
         href="/listings/host"
-        class="px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide transition duration-200 <%= (typeof active !== 'undefined' && active === 'host') ? 'bg-pink-500/20 text-pink-300 border border-pink-500/40 shadow-[0_0_12px_rgba(255,42,133,0.3)]' : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]' %>"
+        class="transition hover:text-pink-300 <%= (typeof active !== 'undefined' && active === 'host') ? 'text-pink-400 font-semibold' : 'hover:text-white' %>"
       >
         Host
       </a>
     </div>
 
-    <!-- Right Controls (Minimal Glass Buttons) -->
+    <!-- Right: Minimal Sleek Controls -->
     <div class="flex items-center gap-2">
       <!-- Become a Host Pill -->
       <a
         href="/listings/host"
-        class="px-3.5 sm:px-4 py-1.5 rounded-full text-xs font-medium text-pink-300 border border-pink-500/35 bg-pink-500/10 hover:bg-pink-500/20 hover:border-pink-500/70 hover:text-white transition duration-200 shadow-[0_0_12px_rgba(255,42,133,0.2)] hover:shadow-[0_0_20px_rgba(255,42,133,0.45)] flex items-center gap-1.5"
+        class="px-3.5 py-1.5 rounded-full text-[11px] font-medium text-pink-300 border border-pink-500/30 bg-pink-500/10 hover:bg-pink-500/20 hover:border-pink-500/60 hover:text-white transition duration-200 shadow-[0_0_12px_rgba(255,42,133,0.15)] flex items-center gap-1.5"
       >
         <i class="fa-solid fa-sparkles text-[9px] text-pink-400"></i>
         <span>Become a host</span>
       </a>
 
-      <!-- Quick Explore Icon -->
+      <!-- Quick Explore Globe -->
       <a
         href="/listings"
-        class="w-8 h-8 rounded-full bg-white/[0.03] border border-white/10 hover:border-pink-500/40 hover:text-pink-400 text-zinc-400 flex items-center justify-center transition hover:shadow-[0_0_12px_rgba(255,42,133,0.3)]"
+        class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/[0.03] border border-white/10 hover:border-pink-500/40 text-zinc-400 hover:text-pink-400 flex items-center justify-center transition"
         title="Explore all stays"
       >
-        <i class="fa-solid fa-compass text-xs"></i>
+        <i class="fa-solid fa-globe text-xs"></i>
       </a>
 
       <!-- Mobile Menu Toggle -->
       <button
         id="mobileMenuBtn"
         type="button"
-        class="md:hidden w-8 h-8 rounded-full bg-white/[0.03] border border-white/10 hover:border-pink-500/40 text-pink-400 flex items-center justify-center transition cursor-pointer"
+        class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/[0.03] border border-white/10 text-zinc-400 hover:text-pink-400 md:hidden flex items-center justify-center transition cursor-pointer"
         aria-label="Toggle navigation menu"
       >
         <i class="fa-solid fa-bars-staggered text-xs"></i>
@@ -84,46 +89,46 @@
   <!-- Mobile Dropdown Navigation -->
   <div
     id="mobileMenu"
-    class="hidden md:hidden max-w-6xl mx-auto mt-2 p-4 rounded-3xl bg-zinc-950/90 border border-pink-500/25 backdrop-blur-2xl shadow-[0_15px_40px_rgba(0,0,0,0.85)] transition-all"
+    class="hidden md:hidden max-w-5xl mx-auto mt-2 p-4 rounded-2xl bg-[#08080c]/95 border border-white/10 backdrop-blur-2xl shadow-[0_15px_40px_rgba(0,0,0,0.85)] transition-all"
   >
-    <div class="flex flex-col space-y-2 zodiac-font text-sm text-zinc-300">
+    <div class="flex flex-col space-y-2 zodiac-font text-xs text-zinc-300">
       <a
         href="/"
-        class="px-4 py-2.5 rounded-xl hover:bg-pink-500/10 hover:text-pink-300 transition flex items-center justify-between"
+        class="px-3 py-2 rounded-xl hover:bg-pink-500/10 hover:text-pink-300 transition flex items-center justify-between"
       >
         <span>Home</span>
-        <i class="fa-solid fa-chevron-right text-xs text-pink-500/50"></i>
+        <i class="fa-solid fa-chevron-right text-[10px] text-pink-400/50"></i>
       </a>
       <a
         href="/listings"
-        class="px-4 py-2.5 rounded-xl hover:bg-pink-500/10 hover:text-pink-300 transition flex items-center justify-between"
+        class="px-3 py-2 rounded-xl hover:bg-pink-500/10 hover:text-pink-300 transition flex items-center justify-between"
       >
         <span>All Stays</span>
-        <i class="fa-solid fa-chevron-right text-xs text-pink-500/50"></i>
+        <i class="fa-solid fa-chevron-right text-[10px] text-pink-400/50"></i>
       </a>
       <a
         href="/listings?search=Villa"
-        class="px-4 py-2.5 rounded-xl hover:bg-pink-500/10 hover:text-pink-300 transition flex items-center justify-between"
+        class="px-3 py-2 rounded-xl hover:bg-pink-500/10 hover:text-pink-300 transition flex items-center justify-between"
       >
         <span>Villas</span>
-        <i class="fa-solid fa-chevron-right text-xs text-pink-500/50"></i>
+        <i class="fa-solid fa-chevron-right text-[10px] text-pink-400/50"></i>
       </a>
       <a
         href="/listings?search=Resort"
-        class="px-4 py-2.5 rounded-xl hover:bg-pink-500/10 hover:text-pink-300 transition flex items-center justify-between"
+        class="px-3 py-2 rounded-xl hover:bg-pink-500/10 hover:text-pink-300 transition flex items-center justify-between"
       >
         <span>Resorts</span>
-        <i class="fa-solid fa-chevron-right text-xs text-pink-500/50"></i>
+        <i class="fa-solid fa-chevron-right text-[10px] text-pink-400/50"></i>
       </a>
       <a
         href="/listings/host"
-        class="px-4 py-2.5 rounded-xl bg-pink-500/15 border border-pink-500/35 text-pink-300 font-semibold transition flex items-center justify-between"
+        class="px-3 py-2 rounded-xl bg-pink-500/15 border border-pink-500/35 text-pink-300 font-semibold transition flex items-center justify-between"
       >
         <span class="flex items-center gap-2">
-          <i class="fa-solid fa-plus text-xs"></i>
+          <i class="fa-solid fa-plus text-[10px]"></i>
           Host Your Property
         </span>
-        <i class="fa-solid fa-arrow-right text-xs"></i>
+        <i class="fa-solid fa-arrow-right text-[10px]"></i>
       </a>
     </div>
   </div>
