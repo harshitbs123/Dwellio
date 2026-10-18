@@ -296,7 +296,7 @@
                       <div class="flex items-center justify-between gap-3 flex-wrap">
                         <div>
                           <p class="font-semibold text-sm text-white"><%= review.name %></p>
-                          <p class="text-[10px] uppercase tracking-[0.18em] text-zinc-500 mt-0.5"><%= review.createdAt.toString().split(" ").slice(0, 4).join(" ") %></p>
+                          <p class="text-[10px] uppercase tracking-[0.18em] text-zinc-500 mt-0.5"><%= (review.createdAt ? review.createdAt.toString().split(" ").slice(0, 4).join(" ") : "Recent stay") %></p>
                         </div>
                         <!-- Rating Stars -->
                         <div class="flex items-center gap-1 text-pink-400 text-[10px]">

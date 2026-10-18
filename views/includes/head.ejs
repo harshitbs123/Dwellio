@@ -243,4 +243,466 @@
       transparent 70%
     );
   }
+
+  /* ========================================================
+     FLOATING 3D GLASSMORPHISM ORBS (BEHIND CONTENT)
+     ======================================================== */
+  .glass-glow-orb {
+    position: fixed;
+    border-radius: 9999px;
+    filter: blur(85px);
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+    will-change: transform;
+    z-index: -20;
+  }
+
+  /* 1. Neon Pink / Magenta Glowing Orb (Top-Right) */
+  .orb-pink {
+    width: 520px;
+    height: 520px;
+    top: -60px;
+    right: 5%;
+    background: radial-gradient(circle, rgba(255, 42, 133, 0.55) 0%, rgba(236, 72, 153, 0.35) 45%, transparent 70%);
+    animation: orb-float-pink 14s ease-in-out infinite alternate;
+  }
+
+  /* 2. Electric Violet / Purple Glowing Orb (Left-Center, From Reference) */
+  .orb-purple {
+    width: 540px;
+    height: 540px;
+    top: 28%;
+    left: -120px;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.48) 0%, rgba(139, 92, 246, 0.28) 45%, transparent 70%);
+    animation: orb-float-purple 18s ease-in-out infinite alternate;
+  }
+
+  /* 3. Cyan / Electric Blue Iridescent Lens Orb (Bottom-Right, From Reference) */
+  .orb-cyan {
+    width: 480px;
+    height: 480px;
+    bottom: 5%;
+    right: 5%;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.4) 0%, rgba(99, 102, 241, 0.25) 45%, transparent 70%);
+    animation: orb-float-cyan 16s ease-in-out infinite alternate;
+  }
+
+  /* 4. Sunset Rose / Warm Ruby Orb */
+  .orb-sunset {
+    width: 440px;
+    height: 440px;
+    top: 60%;
+    left: 32%;
+    background: radial-gradient(circle, rgba(251, 113, 133, 0.4) 0%, rgba(244, 63, 94, 0.2) 50%, transparent 70%);
+    animation: orb-float-sunset 20s ease-in-out infinite alternate;
+  }
+
+  @keyframes orb-float-pink {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-45px, 35px) scale(1.1); }
+    100% { transform: translate(30px, -25px) scale(0.95); }
+  }
+
+  @keyframes orb-float-purple {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(40px, -45px) scale(1.08); }
+    100% { transform: translate(-25px, 30px) scale(0.92); }
+  }
+
+  @keyframes orb-float-cyan {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-35px, -35px) scale(1.12); }
+    100% { transform: translate(40px, 25px) scale(0.9); }
+  }
+
+  @keyframes orb-float-sunset {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(50px, 30px) scale(1.06); }
+    100% { transform: translate(-40px, -40px) scale(0.96); }
+  }
+
+  /* ========================================================
+     DARK MODE (ENHANCED GLASSY SPECULAR HIGHLIGHTS)
+     ======================================================== */
+  html[data-theme="dark"] .glass-glow-orb {
+    opacity: 0.65;
+  }
+
+  html[data-theme="dark"] .glass-card,
+  html[data-theme="dark"] article,
+  html[data-theme="dark"] div[class*="backdrop-blur-xl"],
+  html[data-theme="dark"] div[class*="backdrop-blur-2xl"] {
+    background: rgba(10, 10, 16, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.24);
+    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.16), 0 20px 45px -10px rgba(0, 0, 0, 0.7);
+  }
+
+  html[data-theme="dark"] nav {
+    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.1), 0 4px 24px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 42, 133, 0.08);
+  }
+
+  .theme-toggle-btn {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .theme-toggle-btn:hover {
+    background: rgba(255, 42, 133, 0.15);
+    border-color: rgba(255, 42, 133, 0.5);
+    box-shadow: 0 0 15px rgba(255, 42, 133, 0.4);
+    transform: scale(1.05);
+  }
+
+  /* Logo wrapper - ALWAYS clean, zero dark padding */
+  .logo-wrapper {
+    background: transparent !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  html[data-theme="dark"] .dwellio-nav-logo {
+    mix-blend-mode: screen;
+    filter: drop-shadow(2px 2px 15px rgba(255, 42, 133, 0.6));
+  }
+
+  html[data-theme="light"] .dwellio-nav-logo {
+    mix-blend-mode: normal;
+    filter: drop-shadow(0 2px 10px rgba(255, 42, 133, 0.45));
+  }
+
+  /* ========================================================
+     MINIMAL FROSTED GLASS MODE (LIGHT MODE)
+     ======================================================== */
+  html[data-theme="light"] {
+    color-scheme: light;
+  }
+
+  /* Soft luminous opacity for floating orbs behind light glass */
+  html[data-theme="light"] .orb-pink {
+    opacity: 0.38;
+  }
+  html[data-theme="light"] .orb-purple {
+    opacity: 0.32;
+  }
+  html[data-theme="light"] .orb-cyan {
+    opacity: 0.3;
+  }
+  html[data-theme="light"] .orb-sunset {
+    opacity: 0.28;
+  }
+
+  /* Minimal clean canvas - NOT an all-pink wash */
+  html[data-theme="light"] body {
+    background-color: #f7f8fb !important;
+    background-image: 
+      radial-gradient(ellipse 90% 60% at 50% 0%, rgba(255, 255, 255, 0.95) 0%, transparent 80%),
+      linear-gradient(180deg, #f8f9fd 0%, #f3f5fa 50%, #f6f7fc 100%) !important;
+    background-attachment: fixed !important;
+    color: #161622 !important;
+  }
+
+  /* Header & Navigation Bar in Minimal Frosted Glass */
+  html[data-theme="light"] header {
+    background: rgba(248, 249, 253, 0.3) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+    backdrop-filter: blur(25px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
+  }
+
+  html[data-theme="light"] nav {
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(28px) saturate(190%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.85) !important;
+    border-top: 1px solid #ffffff !important;
+    box-shadow: 
+      0 8px 30px -4px rgba(0, 0, 0, 0.05),
+      0 1px 3px 0 rgba(255, 255, 255, 0.8),
+      inset 0 1px 1px 0 #ffffff !important;
+  }
+
+  html[data-theme="light"] nav:hover {
+    border-color: rgba(255, 42, 133, 0.4) !important;
+    background: rgba(255, 255, 255, 0.72) !important;
+    box-shadow: 
+      0 12px 35px -4px rgba(255, 42, 133, 0.16),
+      inset 0 1px 1px 0 #ffffff !important;
+  }
+
+  /* Nav Links in Light Mode */
+  html[data-theme="light"] nav a,
+  html[data-theme="light"] nav .text-zinc-300 {
+    color: #3b3b4a !important;
+    font-weight: 400;
+  }
+
+  html[data-theme="light"] nav a:hover {
+    color: #ff2a85 !important;
+  }
+
+  html[data-theme="light"] nav a.text-pink-400 {
+    color: #ff2a85 !important;
+    font-weight: 600;
+  }
+
+  /* Theme Toggle Button in Light Mode */
+  html[data-theme="light"] .theme-toggle-btn {
+    background: rgba(255, 255, 255, 0.75) !important;
+    backdrop-filter: blur(16px) !important;
+    border-color: rgba(255, 42, 133, 0.25) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), inset 0 1px 1px #ffffff !important;
+  }
+
+  html[data-theme="light"] .theme-toggle-btn:hover {
+    border-color: rgba(255, 42, 133, 0.6) !important;
+    background: #ffffff !important;
+    box-shadow: 0 0 18px rgba(255, 42, 133, 0.3) !important;
+    transform: scale(1.05);
+  }
+
+  /* Minimal Translucent Liquid Glass Cards (Refracting Orbs Behind) */
+  html[data-theme="light"] .glass-panel,
+  html[data-theme="light"] .glass-card,
+  html[data-theme="light"] article,
+  html[data-theme="light"] div[class*="bg-white/[0.02]"],
+  html[data-theme="light"] div[class*="bg-white/[0.03]"],
+  html[data-theme="light"] div[class*="bg-white/[0.01]"],
+  html[data-theme="light"] div[class*="bg-zinc-950/40"],
+  html[data-theme="light"] div[class*="bg-zinc-950/60"],
+  html[data-theme="light"] div[class*="bg-zinc-950/70"],
+  html[data-theme="light"] div[class*="bg-zinc-950"] {
+    background: rgba(255, 255, 255, 0.52) !important;
+    backdrop-filter: blur(28px) saturate(190%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.8) !important;
+    border-top: 1px solid #ffffff !important;
+    box-shadow: 
+      0 16px 40px -10px rgba(0, 0, 0, 0.05),
+      0 2px 8px -1px rgba(0, 0, 0, 0.02),
+      inset 0 1px 1px 0 #ffffff !important;
+  }
+
+  html[data-theme="light"] article:hover,
+  html[data-theme="light"] .glass-card:hover {
+    background: rgba(255, 255, 255, 0.72) !important;
+    border-color: rgba(255, 42, 133, 0.45) !important;
+    box-shadow: 
+      0 22px 50px -10px rgba(255, 42, 133, 0.18),
+      0 4px 12px -2px rgba(0, 0, 0, 0.04),
+      inset 0 1px 1px 0 #ffffff !important;
+    transform: translateY(-2px);
+  }
+
+  /* Sleek Frosted Pills & Floating Widgets */
+  html[data-theme="light"] .glass-pill,
+  html[data-theme="light"] div[class*="border-white/[0.07]"],
+  html[data-theme="light"] div[class*="border-white/[0.08]"],
+  html[data-theme="light"] div[class*="border-white/[0.06]"] {
+    border-color: rgba(255, 255, 255, 0.7) !important;
+  }
+
+  html[data-theme="light"] a[class*="bg-white/[0.02]"],
+  html[data-theme="light"] a[class*="bg-white/[0.03]"],
+  html[data-theme="light"] a[class*="bg-white/[0.04]"],
+  html[data-theme="light"] div[class*="bg-white/[0.02]"],
+  html[data-theme="light"] div[class*="bg-white/[0.04]"] {
+    background: rgba(255, 255, 255, 0.45) !important;
+    backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.75) !important;
+    color: #434354 !important;
+  }
+
+  html[data-theme="light"] a[class*="bg-white/[0.02]"]:hover,
+  html[data-theme="light"] a[class*="bg-white/[0.03]"]:hover {
+    background: rgba(255, 42, 133, 0.12) !important;
+    border-color: rgba(255, 42, 133, 0.4) !important;
+    color: #ff2a85 !important;
+  }
+
+  /* Active Category Pills */
+  html[data-theme="light"] a[class*="bg-pink-500/10"],
+  html[data-theme="light"] span[class*="bg-pink-500/10"],
+  html[data-theme="light"] div[class*="bg-pink-500/10"] {
+    background: rgba(255, 42, 133, 0.12) !important;
+    border-color: rgba(255, 42, 133, 0.35) !important;
+    color: #ff2a85 !important;
+  }
+
+  /* Crisp, minimal modern typography */
+  html[data-theme="light"] h1,
+  html[data-theme="light"] h2,
+  html[data-theme="light"] h3,
+  html[data-theme="light"] h4,
+  html[data-theme="light"] .text-white {
+    color: #14141c !important;
+  }
+
+  html[data-theme="light"] .text-zinc-300 {
+    color: #3b3b4a !important;
+  }
+
+  html[data-theme="light"] .text-zinc-400 {
+    color: #5b5b6a !important;
+  }
+
+  html[data-theme="light"] .text-zinc-500 {
+    color: #838392 !important;
+  }
+
+  /* Vivid signature pink gradients */
+  html[data-theme="light"] .text-gradient-pink {
+    background: linear-gradient(135deg, #ff2a85 0%, #ec4899 45%, #f43f5e 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+
+  html[data-theme="light"] .text-gradient-vice {
+    background: linear-gradient(135deg, #ff2a85 0%, #d946ef 50%, #f43f5e 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+
+  /* Hero Search Bar in Translucent Frosted Glass */
+  html[data-theme="light"] form[action="/listings"] {
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(28px) saturate(190%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.85) !important;
+    border-top: 1px solid #ffffff !important;
+    box-shadow: 
+      0 16px 40px -10px rgba(0, 0, 0, 0.06),
+      inset 0 1px 1px 0 #ffffff !important;
+  }
+
+  html[data-theme="light"] form[action="/listings"]:hover {
+    border-color: rgba(255, 42, 133, 0.45) !important;
+    background: rgba(255, 255, 255, 0.75) !important;
+    box-shadow: 
+      0 20px 45px -8px rgba(255, 42, 133, 0.16),
+      inset 0 1px 1px 0 #ffffff !important;
+  }
+
+  /* Form Inputs (Translucent Glass with Pink Focus) */
+  html[data-theme="light"] input,
+  html[data-theme="light"] textarea,
+  html[data-theme="light"] select,
+  html[data-theme="light"] .glass-input {
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(0, 0, 0, 0.09) !important;
+    color: #14141c !important;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03) !important;
+  }
+
+  html[data-theme="light"] input::placeholder,
+  html[data-theme="light"] textarea::placeholder {
+    color: #838392 !important;
+  }
+
+  html[data-theme="light"] input:focus,
+  html[data-theme="light"] textarea:focus {
+    background: #ffffff !important;
+    border-color: #ff2a85 !important;
+    box-shadow: 0 0 0 3px rgba(255, 42, 133, 0.18), inset 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+  }
+
+  /* Badges & Price Tag Pills */
+  html[data-theme="light"] .bg-black\/60,
+  html[data-theme="light"] .bg-black\/50 {
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(16px) !important;
+    border-color: rgba(255, 42, 133, 0.3) !important;
+    color: #14141c !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05), inset 0 1px 1px #ffffff !important;
+  }
+
+  html[data-theme="light"] .bg-black\/60 span,
+  html[data-theme="light"] .bg-black\/50 span {
+    color: #14141c !important;
+  }
+
+  html[data-theme="light"] .bg-black\/60 span.text-gradient-pink {
+    -webkit-text-fill-color: #ff2a85 !important;
+  }
+
+  /* Avatar & Icon backdrop */
+  html[data-theme="light"] .bg-\[\#030305\]:not(body) {
+    background: #ffffff !important;
+  }
+
+  /* Borders in Light Mode */
+  html[data-theme="light"] .border-white\/\[0\.04\],
+  html[data-theme="light"] .border-white\/\[0\.05\],
+  html[data-theme="light"] .border-white\/\[0\.06\],
+  html[data-theme="light"] .border-white\/\[0\.07\],
+  html[data-theme="light"] .border-white\/\[0\.08\],
+  html[data-theme="light"] .border-white\/10,
+  html[data-theme="light"] .border-white\/15,
+  html[data-theme="light"] .border-white\/20 {
+    border-color: rgba(0, 0, 0, 0.06) !important;
+  }
+
+  /* Mobile Dropdown Menu in Minimal Frosted Glass */
+  html[data-theme="light"] #mobileMenu {
+    background: rgba(255, 255, 255, 0.92) !important;
+    backdrop-filter: blur(30px) saturate(190%) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1), inset 0 1px 1px #ffffff !important;
+  }
+
+  html[data-theme="light"] #mobileMenu a,
+  html[data-theme="light"] #mobileMenu button {
+    color: #14141c !important;
+  }
+
+  html[data-theme="light"] #mobileMenu a:hover,
+  html[data-theme="light"] #mobileMenu button:hover {
+    background: rgba(255, 42, 133, 0.08) !important;
+    color: #ff2a85 !important;
+  }
+
+  /* Footer styling - keep Dwellio and D fully visible */
+  html[data-theme="light"] footer#about {
+    color: #ffffff !important;
+  }
+  html[data-theme="light"] footer#about .zodiac-font,
+  html[data-theme="light"] footer#about strong {
+    color: #ffffff !important;
+  }
+
+  .footer-brand-title,
+  .footer-brand-title * {
+    color: #ff2a85 !important;
+    -webkit-text-fill-color: #ff2a85 !important;
+  }
+
+  /* Light Mode Scrollbar (Minimal Glass) */
+  html[data-theme="light"] ::-webkit-scrollbar-track {
+    background: rgba(240, 242, 248, 0.6);
+  }
+
+  html[data-theme="light"] ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(255, 42, 133, 0.45) 0%, rgba(236, 72, 153, 0.25) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 10px rgba(255, 42, 133, 0.2);
+  }
+
+  html[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, rgba(255, 42, 133, 0.75) 0%, rgba(244, 63, 94, 0.6) 100%);
+  }
 </style>
+
+<!-- Zero-flicker instant theme initializer -->
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("dwellio_theme") || "dark";
+      document.documentElement.setAttribute("data-theme", saved);
+    } catch (e) {
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
+  })();
+</script>

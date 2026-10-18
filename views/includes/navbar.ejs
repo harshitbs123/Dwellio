@@ -1,17 +1,27 @@
+<!-- Ambient Glassmorphism Floating Glow Orbs (Behind content) -->
+<div class="fixed inset-0 pointer-events-none overflow-hidden -z-20">
+  <div class="glass-glow-orb orb-pink"></div>
+  <div class="glass-glow-orb orb-purple"></div>
+  <div class="glass-glow-orb orb-cyan"></div>
+  <div class="glass-glow-orb orb-sunset"></div>
+</div>
+
 <!-- Sleek, Minimal, Luxury Vice City Navbar -->
-<header class="sticky top-0 z-50 py-2 sm:py-2.5 px-3 sm:px-6 backdrop-blur-xl bg-black/40 border-b border-white/[0.04] transition-all duration-300">
+<header class="sticky top-0 z-50 py-2 sm:py-2.5 px-3 sm:px-6 backdrop-blur-xl bg-black/10 border-b border-white/[0.04] transition-all duration-300">
   <nav
     class="max-w-5xl mx-auto px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-[#08080c]/80 backdrop-blur-2xl border border-white/[0.08] hover:border-pink-500/25 shadow-[0_4px_24px_rgba(0,0,0,0.6),0_0_15px_rgba(255,42,133,0.08)] flex items-center justify-between transition-all duration-300"
   >
     <!-- Left: Sleek Glowing Vice City Logo -->
     <div class="flex-shrink-0 flex items-center">
       <a href="/" class="flex items-center group py-0.5">
-        <img
-          src="/logo.png"
-          alt="Dwellio"
-          class="h-7 sm:h-8 w-auto object-contain mix-blend-screen filter drop-shadow-[2px_2px_15px_rgba(255,42,133,0.6)] group-hover:scale-105 transition-all duration-200"
-          onerror="this.style.display='none'; document.getElementById('textLogo').classList.remove('hidden');"
-        />
+        <div class="logo-wrapper transition-all duration-300">
+          <img
+            src="/logo.png"
+            alt="Dwellio"
+            class="h-7 sm:h-8 w-auto object-contain dwellio-nav-logo filter drop-shadow-[2px_2px_15px_rgba(255,42,133,0.6)] group-hover:scale-105 transition-all duration-200"
+            onerror="this.style.display='none'; document.getElementById('textLogo').classList.remove('hidden');"
+          />
+        </div>
         <span id="textLogo" class="hidden items-center text-white tracking-tight font-medium text-base">
           <i class="text-[#ff2a85] text-xl stardom-font not-italic mr-0.5">D</i><span class="zodiac-font">wellio</span>
         </span>
@@ -64,6 +74,18 @@
         <i class="fa-solid fa-sparkles text-[9px] text-pink-400"></i>
         <span>Become a host</span>
       </a>
+
+      <!-- Apple macOS Glass Theme Toggle (Light / Dark) -->
+      <button
+        id="themeToggleBtn"
+        type="button"
+        class="w-7 h-7 sm:w-8 sm:h-8 rounded-full theme-toggle-btn border flex items-center justify-center transition-all duration-300 cursor-pointer"
+        title="Toggle Theme: macOS Glass Light / Vice City Dark"
+        aria-label="Toggle light and dark theme"
+      >
+        <i class="theme-icon-dark fa-solid fa-moon text-xs text-pink-400"></i>
+        <i class="theme-icon-light fa-solid fa-sun text-xs text-amber-500 hidden"></i>
+      </button>
 
       <!-- Quick Explore Globe -->
       <a
@@ -130,11 +152,26 @@
         </span>
         <i class="fa-solid fa-arrow-right text-[10px]"></i>
       </a>
+
+      <!-- Theme Switcher in Mobile Menu -->
+      <button
+        id="mobileThemeBtn"
+        type="button"
+        class="w-full text-left px-3 py-2.5 rounded-xl hover:bg-pink-500/10 hover:text-pink-300 transition flex items-center justify-between cursor-pointer border border-white/5"
+      >
+        <span class="flex items-center gap-2">
+          <i class="theme-icon-dark fa-solid fa-moon text-xs text-pink-400"></i>
+          <i class="theme-icon-light fa-solid fa-sun text-xs text-amber-500 hidden"></i>
+          <span class="theme-toggle-text">Switch to Light Mode</span>
+        </span>
+        <span class="text-[10px] px-2.5 py-0.5 rounded-full border border-pink-500/30 text-pink-400 theme-badge-text font-medium">macOS Glass</span>
+      </button>
     </div>
   </div>
 </header>
 
 <script>
+  // Mobile Menu Toggle
   const mobileBtn = document.getElementById("mobileMenuBtn");
   const mobileMenu = document.getElementById("mobileMenu");
   if (mobileBtn && mobileMenu) {
@@ -142,4 +179,45 @@
       mobileMenu.classList.toggle("hidden");
     });
   }
+
+  // Theme Switcher Controller
+  (function () {
+    const themeBtn = document.getElementById("themeToggleBtn");
+    const mobileThemeBtn = document.getElementById("mobileThemeBtn");
+    const darkIcons = document.querySelectorAll(".theme-icon-dark");
+    const lightIcons = document.querySelectorAll(".theme-icon-light");
+    const themeTexts = document.querySelectorAll(".theme-toggle-text");
+    const themeBadges = document.querySelectorAll(".theme-badge-text");
+
+    function syncThemeUI(theme) {
+      if (theme === "light") {
+        darkIcons.forEach((i) => i.classList.add("hidden"));
+        lightIcons.forEach((i) => i.classList.remove("hidden"));
+        themeTexts.forEach((t) => (t.textContent = "Switch to Dark Mode"));
+        themeBadges.forEach((b) => (b.textContent = "Vice City"));
+      } else {
+        darkIcons.forEach((i) => i.classList.remove("hidden"));
+        lightIcons.forEach((i) => i.classList.add("hidden"));
+        themeTexts.forEach((t) => (t.textContent = "Switch to Light Mode"));
+        themeBadges.forEach((b) => (b.textContent = "macOS Glass"));
+      }
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute("data-theme") || "dark";
+      const next = current === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      try {
+        localStorage.setItem("dwellio_theme", next);
+      } catch (e) {}
+      syncThemeUI(next);
+    }
+
+    if (themeBtn) themeBtn.addEventListener("click", toggleTheme);
+    if (mobileThemeBtn) mobileThemeBtn.addEventListener("click", toggleTheme);
+
+    // Initial sync with active data-theme
+    const currentTheme = document.documentElement.getAttribute("data-theme") || "dark";
+    syncThemeUI(currentTheme);
+  })();
 </script>
