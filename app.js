@@ -10,8 +10,8 @@ const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
 
 // Models
-const List = require("./Models/listing");
-const Review = require("./Models/review")
+const Listing = require("./Models/listing");
+const Review = require("./Models/review");
 
 // Middleware
 app.use(methodOverride("_method"));
@@ -47,7 +47,7 @@ app.get(
   wrapAsync(async (req, res) => {
     let listings = [];
     try {
-      listings = await List.find();
+      listings = await Listing.find();
     } catch (e) {
       listings = [];
     }
@@ -55,7 +55,7 @@ app.get(
   }),
 );
 
-// 2. All Listings Catalog Route (/listings)
+// 2. All listings Catalog Route (/listings)
 app.get(
   "/listings",
   wrapAsync(async (req, res) => {
@@ -74,14 +74,14 @@ app.get(
       };
     }
 
-    let Listings = [];
+    let listings = [];
     try {
-      Listings = await List.find(query);
+      listings = await Listing.find(query);
     } catch (e) {
-      Listings = [];
+      listings = [];
     }
 
-    res.render("listings.ejs", { Listings, search: search || "" });
+    res.render("listings.ejs", { listings, search: search || "" });
   }),
 );
 
@@ -93,9 +93,30 @@ app.get("/listings/host", (req, res) => {
 app.post(
   "/listings",
   wrapAsync(async (req, res) => {
-    const newListing = new List(req.body.listing);
+    const newListing = new Listing(req.body.listing);
     await newListing.save();
     res.redirect("/listings");
+  }),
+);
+
+// Review Route
+app.post(
+  "/listings/:id/reviews",
+  wrapAsync(async (req, res, next) => {
+    const { id } = req.params;
+    const listing = await Listing.findById(id);
+
+    if (!listing) {
+      return next(new ExpressError(404, "Listing Not Found"));
+    }
+
+    const newReview = new Review(req.body.review);
+    listing.reviews.push(newReview);
+
+    await newReview.save();
+    await listing.save();
+
+    res.redirect(`/listings/${id}`);
   }),
 );
 
@@ -104,11 +125,11 @@ app.get(
   "/listings/:id",
   wrapAsync(async (req, res, next) => {
     let { id } = req.params;
-    const Listing = await List.findById(id);
-    if (!Listing) {
+    const listing = await Listing.findById(id);
+    if (!listing) {
       return next(new ExpressError(404, "Listing Not Found"));
     }
-    res.render("show.ejs", { Listing });
+    res.render("show.ejs", { listing });
   }),
 );
 
@@ -117,7 +138,7 @@ app.get(
   "/listings/:id/edit",
   wrapAsync(async (req, res, next) => {
     let { id } = req.params;
-    const listing = await List.findById(id);
+    const listing = await Listing.findById(id);
     if (!listing) {
       return next(new ExpressError(404, "Listing Not Found"));
     }
@@ -129,7 +150,7 @@ app.patch(
   "/listings/:id",
   wrapAsync(async (req, res) => {
     let { id } = req.params;
-    await List.findByIdAndUpdate(id, req.body.listing);
+    await Listing.findByIdAndUpdate(id, req.body.listing);
     res.redirect(`/listings/${id}`);
   }),
 );
@@ -139,7 +160,7 @@ app.delete(
   "/listings/:id",
   wrapAsync(async (req, res) => {
     let { id } = req.params;
-    await List.findByIdAndDelete(id);
+    await Listing.findByIdAndDelete(id);
     res.redirect("/listings");
   }),
 );
@@ -158,7 +179,7 @@ app.get(
         country: "India",
       },
     ];
-    await List.insertMany(listings);
+    await Listing.insertMany(listings);
     res.send("Test listing added!");
   }),
 );

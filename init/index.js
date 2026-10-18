@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const data = require("./data.js");
-const List = require("../Models/listing.js");
+const Listing = require("../Models/listing.js");
 
 async function main() {
   await mongoose.connect("mongodb://127.0.0.1:27017/rentora");
@@ -17,8 +17,8 @@ main()
 
 const initDB = async () => {
   try {
-    await List.deleteMany({});
-    await List.insertMany(data.data);
+    await Listing.deleteMany({});
+    await Listing.insertMany(data.data);
     console.log("Sample listings data successfully initialized in Dwellio database!");
   } catch (e) {
     console.error("Failed to initialize data:", e);

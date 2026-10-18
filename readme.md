@@ -7,7 +7,7 @@ Users can discover extraordinary architectural villas, mountain retreats, and be
 ## ✨ Features
 
 * 🌟 **New Homepage (`/`)**: Breathtaking landing experience with hero section, live destination search, trending tags, category explorer, curated stays showcase, and host callout banner.
-* 🏠 **All Listings Catalog (`/listings`)**: Clean responsive grid with search filter (`?search=...`), category tags, and wishlist badges.
+* 🏠 **All listings Catalog (`/listings`)**: Clean responsive grid with search filter (`?search=...`), category tags, and wishlist badges.
 * 🔍 **Luxury Property Show Page (`/listings/:id`)**: High-res photo hero, verified host capsule, amenities grid, location information, and a sticky reservation price breakdown card with instant booking calculation.
 * 🏨 **Host / Add Property (`/listings/host`)**: Polished 2-column creation form with interactive live image preview and one-click photo presets.
 * ✏️ **Edit Listing (`/listings/:id/edit`)**: Pre-filled update form with real-time image preview and safe cancellation actions.
@@ -87,7 +87,7 @@ Dwellio/
 npm install
 ```
 
-### 2. Seed Sample Listings (Optional)
+### 2. Seed Sample listings (Optional)
 
 To populate the database with luxury travel destinations:
 

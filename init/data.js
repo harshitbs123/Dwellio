@@ -1,4 +1,4 @@
-const sampleListings = [
+const samplelistings = [
   {
     title: "Camp Della Glamping Resort",
     description:
@@ -91,4 +91,4 @@ const sampleListings = [
   },
 ];
 
-module.exports = { data: sampleListings };
+module.exports = { data: samplelistings };
