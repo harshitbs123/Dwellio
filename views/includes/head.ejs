@@ -143,6 +143,34 @@
     border-color: rgba(255, 42, 133, 0.35);
   }
 
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  .left-column {
+    min-width: 0;
+  }
+
+  .right-column {
+    width: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    .content-grid {
+      grid-template-columns: minmax(0, 1fr) 380px;
+      align-items: start;
+    }
+
+    .right-column {
+      position: sticky;
+      top: 6rem;
+      width: 100%;
+    }
+  }
+
   .glass-button-neon {
     background: linear-gradient(135deg, rgba(255, 42, 133, 0.85) 0%, rgba(244, 63, 94, 0.85) 100%);
     backdrop-filter: blur(12px);
