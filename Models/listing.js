@@ -27,6 +27,12 @@ const listSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  reviews: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Review",
+    },
+  ],
 });
 
 const List = new mongoose.model("List", listSchema);

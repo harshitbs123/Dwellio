@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <%- include("includes/head.ejs", { title: "Places Worth Staying In" }) %>
+  </head>
+  <body class="bg-[#030305] text-white selection:bg-pink-500 selection:text-white">
+    <%- include("includes/navbar.ejs", { active: "home" }) %>
+
+    <div class="relative overflow-hidden">
+      <!-- Ambient background lighting (Vice City neon glow) -->
+      <div
+        class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-gradient-to-b from-pink-500/12 via-rose-500/6 to-transparent rounded-full blur-[140px] pointer-events-none -z-10"
+      ></div>
+
+      <!-- HERO SECTION -->
+      <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 sm:pt-20 pb-16 text-center">
+        <!-- Eyebrow Tag -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-pink-500/25 bg-pink-500/10 text-pink-300 text-xs font-medium tracking-wide mb-6 backdrop-blur-xl shadow-[0_0_15px_rgba(255,42,133,0.15)]">
+          <i class="fa-solid fa-sparkles text-[10px] text-pink-400"></i>
+          <span>Curated Stays · Exceptional Escapes</span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="zodiac-font text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight leading-[1.08] max-w-4xl mx-auto">
+          Find a place that feels
+          <span class="stardom-font text-gradient-pink italic font-normal block sm:inline mt-1 sm:mt-0">
+            extraordinary.
+          </span>
+        </h1>
+
+        <!-- Subheading -->
+        <p class="zodiac-font text-base sm:text-lg text-zinc-400 max-w-xl mx-auto mt-5 font-light leading-relaxed">
+          From cliffside coastal villas and mist-covered mountain chalets to neon-lit penthouses — spaces designed for memory making.
+        </p>
+
+        <!-- MINIMAL GLASS SEARCH BAR -->
+        <div class="mt-10 max-w-3xl mx-auto">
+          <form
+            action="/listings"
+            method="GET"
+            class="p-2 sm:p-2.5 rounded-2xl sm:rounded-full bg-zinc-950/40 border border-white/[0.08] hover:border-pink-500/35 backdrop-blur-2xl shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-300 flex flex-col md:flex-row items-center gap-2"
+          >
+            <!-- Destination Field -->
+            <div class="w-full md:flex-[1.4] flex items-center px-4 py-2 rounded-full hover:bg-white/[0.02] transition text-left">
+              <div class="w-8 h-8 rounded-full bg-pink-500/10 flex items-center justify-center text-pink-400 mr-3 flex-shrink-0">
+                <i class="fa-solid fa-location-dot text-xs"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <label for="search" class="block text-[10px] uppercase font-bold text-pink-400/90 tracking-wider">Where</label>
+                <input
+                  type="text"
+                  name="search"
+                  id="search"
+                  placeholder="Alibaug, Goa, Manali, Bali..."
+                  class="w-full bg-transparent border-0 p-0 text-sm text-white placeholder-zinc-500 focus:outline-none focus:ring-0"
+                />
+              </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="hidden md:block w-px h-7 bg-white/[0.08]"></div>
+
+            <!-- Check-in Dates Mockup -->
+            <div class="w-full md:flex-1 flex items-center px-4 py-2 rounded-full hover:bg-white/[0.02] transition text-left">
+              <div class="w-8 h-8 rounded-full bg-pink-500/10 flex items-center justify-center text-pink-400 mr-3 flex-shrink-0">
+                <i class="fa-regular fa-calendar text-xs"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <span class="block text-[10px] uppercase font-bold text-pink-400/90 tracking-wider">When</span>
+                <span class="text-xs text-zinc-400">Any weekend</span>
+              </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="hidden md:block w-px h-7 bg-white/[0.08]"></div>
+
+            <!-- Guests Mockup -->
+            <div class="w-full md:flex-1 flex items-center px-4 py-2 rounded-full hover:bg-white/[0.02] transition text-left">
+              <div class="w-8 h-8 rounded-full bg-pink-500/10 flex items-center justify-center text-pink-400 mr-3 flex-shrink-0">
+                <i class="fa-solid fa-user-group text-xs"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <span class="block text-[10px] uppercase font-bold text-pink-400/90 tracking-wider">Who</span>
+                <span class="text-xs text-zinc-400">2 guests</span>
+              </div>
+            </div>
+
+            <!-- Search Button -->
+            <button
+              type="submit"
+              class="w-full md:w-auto px-6 py-3 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-red-500 text-white font-semibold text-xs tracking-wide flex items-center justify-center gap-2 shadow-[0_0_18px_rgba(255,42,133,0.45)] hover:shadow-[0_0_28px_rgba(255,42,133,0.7)] hover:scale-102 active:scale-98 transition-all cursor-pointer flex-shrink-0"
+            >
+              <i class="fa-solid fa-magnifying-glass text-xs"></i>
+              <span>Explore</span>
+            </button>
+          </form>
+
+          <!-- Popular Destination Tags -->
+          <div class="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs text-zinc-400 zodiac-font">
+            <span class="text-pink-400/70 font-light mr-1">Trending:</span>
+            <a href="/listings?search=Alibaug" class="px-3 py-1 rounded-full bg-white/[0.02] hover:bg-pink-500/15 hover:text-pink-300 border border-white/[0.06] hover:border-pink-500/30 transition">Alibaug</a>
+            <a href="/listings?search=Goa" class="px-3 py-1 rounded-full bg-white/[0.02] hover:bg-pink-500/15 hover:text-pink-300 border border-white/[0.06] hover:border-pink-500/30 transition">Goa</a>
+            <a href="/listings?search=Manali" class="px-3 py-1 rounded-full bg-white/[0.02] hover:bg-pink-500/15 hover:text-pink-300 border border-white/[0.06] hover:border-pink-500/30 transition">Manali</a>
+            <a href="/listings?search=Lonavala" class="px-3 py-1 rounded-full bg-white/[0.02] hover:bg-pink-500/15 hover:text-pink-300 border border-white/[0.06] hover:border-pink-500/30 transition">Lonavala</a>
+            <a href="/listings?search=Udaipur" class="px-3 py-1 rounded-full bg-white/[0.02] hover:bg-pink-500/15 hover:text-pink-300 border border-white/[0.06] hover:border-pink-500/30 transition">Udaipur</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- MINIMAL CATEGORIES STRIP -->
+      <section class="max-w-6xl mx-auto px-4 sm:px-6 py-4">
+        <div class="flex items-center justify-between border-y border-white/[0.06] py-3 overflow-x-auto no-scrollbar gap-6 sm:gap-8">
+          <a href="/listings" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-300 text-xs font-medium flex-shrink-0 shadow-[0_0_12px_rgba(255,42,133,0.2)]">
+            <i class="fa-solid fa-sparkles text-[10px]"></i>
+            <span>All Escapes</span>
+          </a>
+
+          <a href="/listings?search=Villa" class="flex items-center gap-2 px-3 py-1.5 rounded-full text-zinc-400 hover:text-pink-300 hover:bg-white/[0.03] transition text-xs font-light flex-shrink-0">
+            <i class="fa-solid fa-hotel text-xs"></i>
+            <span>Villas</span>
+          </a>
+
+          <a href="/listings?search=Beach" class="flex items-center gap-2 px-3 py-1.5 rounded-full text-zinc-400 hover:text-pink-300 hover:bg-white/[0.03] transition text-xs font-light flex-shrink-0">
+            <i class="fa-solid fa-umbrella-beach text-xs"></i>
+            <span>Beachfront</span>
+          </a>
+
+          <a href="/listings?search=Mountain" class="flex items-center gap-2 px-3 py-1.5 rounded-full text-zinc-400 hover:text-pink-300 hover:bg-white/[0.03] transition text-xs font-light flex-shrink-0">
+            <i class="fa-solid fa-mountain-sun text-xs"></i>
+            <span>Mountains</span>
+          </a>
+
+          <a href="/listings?search=Pool" class="flex items-center gap-2 px-3 py-1.5 rounded-full text-zinc-400 hover:text-pink-300 hover:bg-white/[0.03] transition text-xs font-light flex-shrink-0">
+            <i class="fa-solid fa-water-ladder text-xs"></i>
+            <span>Infinity Pools</span>
+          </a>
+
+          <a href="/listings?search=Resort" class="flex items-center gap-2 px-3 py-1.5 rounded-full text-zinc-400 hover:text-pink-300 hover:bg-white/[0.03] transition text-xs font-light flex-shrink-0">
+            <i class="fa-solid fa-tree text-xs"></i>
+            <span>Resorts</span>
+          </a>
+
+          <a href="/listings?search=Penthouse" class="flex items-center gap-2 px-3 py-1.5 rounded-full text-zinc-400 hover:text-pink-300 hover:bg-white/[0.03] transition text-xs font-light flex-shrink-0">
+            <i class="fa-solid fa-city text-xs"></i>
+            <span>Penthouses</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- FEATURED STAYS SHOWCASE -->
+      <section class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+          <div>
+            <span class="text-pink-400 text-[11px] font-bold uppercase tracking-widest">Handpicked Stays</span>
+            <h2 class="zodiac-font text-2xl sm:text-4xl font-light mt-1 text-white">
+              Stays worth slowing down for on
+              <span class="stardom-font text-gradient-pink italic font-normal">Dwellio</span>
+            </h2>
+          </div>
+          <a
+            href="/listings"
+            class="inline-flex items-center gap-2 text-xs font-semibold text-pink-400 hover:text-pink-300 transition group"
+          >
+            <span>View all listings</span>
+            <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+          </a>
+        </div>
+
+        <!-- LISTINGS GRID -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+          <% if (typeof listings !== 'undefined' && listings.length > 0) { %>
+            <% for (let listing of listings.slice(0, 6)) { %>
+              <a href="/listings/<%= listing._id %>" class="group block">
+                <article
+                  class="rounded-3xl bg-white/[0.02] border border-white/[0.07] backdrop-blur-xl p-3.5 transition-all duration-300 hover:border-pink-500/50 hover:shadow-[0_10px_35px_rgba(255,42,133,0.22)] hover:-translate-y-1 flex flex-col h-full"
+                >
+                  <!-- Image Wrapper -->
+                  <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-zinc-900 mb-3.5">
+                    <img
+                      src="<%= listing.image %>"
+                      alt="<%= listing.title %>"
+                      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-104"
+                      loading="lazy"
+                      onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80';"
+                    />
+
+                    <!-- Guest Favourite Badge -->
+                    <div class="absolute top-2.5 left-2.5">
+                      <span class="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-black/60 backdrop-blur-md text-pink-300 border border-pink-500/30 flex items-center gap-1 shadow-md">
+                        <i class="fa-solid fa-star text-pink-400 text-[9px]"></i>
+                        <span>Guest favourite</span>
+                      </span>
+                    </div>
+
+                    <!-- Heart/Save Icon -->
+                    <button
+                      type="button"
+                      class="absolute top-2.5 right-2.5 w-7 h-7 rounded-full bg-black/50 backdrop-blur-md border border-white/15 text-white/80 hover:text-pink-400 hover:scale-110 flex items-center justify-center transition cursor-pointer"
+                      aria-label="Save listing"
+                    >
+                      <i class="fa-regular fa-heart text-[11px]"></i>
+                    </button>
+                  </div>
+
+                  <!-- Details -->
+                  <div class="flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 class="stardom-font text-lg text-gradient-pink font-light tracking-wide line-clamp-1 group-hover:opacity-90">
+                        <%= listing.title %>
+                      </h3>
+
+                      <p class="zodiac-font text-xs text-zinc-400 mt-1 flex items-center gap-1.5 font-light">
+                        <i class="fa-solid fa-location-dot text-pink-500 text-[10px]"></i>
+                        <span class="line-clamp-1"><%= listing.location %>, <%= listing.country %></span>
+                      </p>
+
+                      <p class="zodiac-font text-xs text-zinc-400/80 mt-2 line-clamp-2 font-thin leading-relaxed">
+                        <%= listing.description %>
+                      </p>
+                    </div>
+
+                    <!-- Price Strip -->
+                    <div class="mt-4 pt-3 border-t border-white/[0.05] flex items-center justify-between">
+                      <div class="flex items-baseline gap-1">
+                        <span class="px-2.5 py-0.5 rounded-xl bg-black/60 border border-pink-500/30 text-white font-bold text-sm shadow-[0_0_10px_rgba(255,42,133,0.15)]">
+                          <span class="text-gradient-pink">₹<%= Number(listing.price).toLocaleString("en-IN") %></span>
+                        </span>
+                        <span class="text-[11px] text-zinc-500 font-light zodiac-font">/ night</span>
+                      </div>
+
+                      <span class="text-xs font-medium text-pink-400 group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                        <span>Details</span>
+                        <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                      </span>
+                    </div>
+                  </div>
+                </article>
+              </a>
+            <% } %>
+          <% } else { %>
+            <div class="col-span-full text-center py-12 rounded-3xl border border-white/[0.08] bg-zinc-950/40 backdrop-blur-xl p-8">
+              <i class="fa-solid fa-hotel text-3xl text-pink-400 mb-3 block"></i>
+              <h3 class="zodiac-font text-xl font-light text-white">No listings in database yet</h3>
+              <p class="zodiac-font text-xs text-zinc-400 mt-1.5 mb-5">Be the first to list a luxury retreat on Dwellio!</p>
+              <a href="/listings/host" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold text-xs shadow-[0_0_15px_rgba(255,42,133,0.4)]">
+                <i class="fa-solid fa-plus text-[10px]"></i>
+                <span>Add First Listing</span>
+              </a>
+            </div>
+          <% } %>
+        </div>
+
+        <div class="text-center mt-10">
+          <a
+            href="/listings"
+            class="inline-flex items-center gap-2.5 px-7 py-3 rounded-full bg-white/[0.03] border border-white/15 text-white font-medium text-xs tracking-wide hover:border-pink-500/50 hover:bg-pink-500/10 hover:shadow-[0_0_20px_rgba(255,42,133,0.35)] transition group"
+          >
+            <span>Explore All Stays on Dwellio</span>
+            <i class="fa-solid fa-arrow-right text-pink-400 group-hover:translate-x-1 transition-transform text-[10px]"></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- WHY DWELLIO PILLARS (MINIMAL GLASS) -->
+      <section class="max-w-6xl mx-auto px-4 sm:px-6 py-14">
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <span class="text-pink-400 text-[11px] font-bold uppercase tracking-widest">The Dwellio Standard</span>
+          <h2 class="zodiac-font text-2xl sm:text-4xl font-light mt-1.5">
+            Designed for travelers who appreciate the
+            <span class="stardom-font text-gradient-pink italic font-normal">details.</span>
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <!-- Pillar 1 -->
+          <div class="rounded-3xl p-5 bg-white/[0.02] border border-white/[0.07] backdrop-blur-xl hover:border-pink-500/40 hover:shadow-[0_8px_25px_rgba(255,42,133,0.18)] transition">
+            <div class="w-10 h-10 rounded-2xl bg-pink-500/10 border border-pink-500/25 flex items-center justify-center text-pink-400 text-base mb-4">
+              <i class="fa-solid fa-gem"></i>
+            </div>
+            <h3 class="stardom-font text-lg text-white font-light">Architectural First</h3>
+            <p class="zodiac-font text-xs text-zinc-400 mt-1.5 font-light leading-relaxed">
+              Every retreat is handpicked for exceptional craftsmanship, scenic soul, and distinctive atmosphere.
+            </p>
+          </div>
+
+          <!-- Pillar 2 -->
+          <div class="rounded-3xl p-5 bg-white/[0.02] border border-white/[0.07] backdrop-blur-xl hover:border-pink-500/40 hover:shadow-[0_8px_25px_rgba(255,42,133,0.18)] transition">
+            <div class="w-10 h-10 rounded-2xl bg-pink-500/10 border border-pink-500/25 flex items-center justify-center text-pink-400 text-base mb-4">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3 class="stardom-font text-lg text-white font-light">Seamless Booking</h3>
+            <p class="zodiac-font text-xs text-zinc-400 mt-1.5 font-light leading-relaxed">
+              Instant confirmation, transparent pricing without hidden surprises, and trusted payment security.
+            </p>
+          </div>
+
+          <!-- Pillar 3 -->
+          <div class="rounded-3xl p-5 bg-white/[0.02] border border-white/[0.07] backdrop-blur-xl hover:border-pink-500/40 hover:shadow-[0_8px_25px_rgba(255,42,133,0.18)] transition">
+            <div class="w-10 h-10 rounded-2xl bg-pink-500/10 border border-pink-500/25 flex items-center justify-center text-pink-400 text-base mb-4">
+              <i class="fa-solid fa-bell-concierge"></i>
+            </div>
+            <h3 class="stardom-font text-lg text-white font-light">24/7 VIP Concierge</h3>
+            <p class="zodiac-font text-xs text-zinc-400 mt-1.5 font-light leading-relaxed">
+              Round-the-clock dedicated assistance from private dining reservations to bespoke travel arrangements.
+            </p>
+          </div>
+
+          <!-- Pillar 4 -->
+          <div class="rounded-3xl p-5 bg-white/[0.02] border border-white/[0.07] backdrop-blur-xl hover:border-pink-500/40 hover:shadow-[0_8px_25px_rgba(255,42,133,0.18)] transition">
+            <div class="w-10 h-10 rounded-2xl bg-pink-500/10 border border-pink-500/25 flex items-center justify-center text-pink-400 text-base mb-4">
+              <i class="fa-solid fa-medal"></i>
+            </div>
+            <h3 class="stardom-font text-lg text-white font-light">Verified Hosts</h3>
+            <p class="zodiac-font text-xs text-zinc-400 mt-1.5 font-light leading-relaxed">
+              Welcoming superhosts committed to pristine cleanliness, thoughtful touches, and local insider secrets.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- BECOME A HOST CALLOUT (MINIMAL GLASS) -->
+      <section class="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+        <div
+          class="relative rounded-3xl p-8 sm:p-12 overflow-hidden border border-pink-500/30 bg-zinc-950/40 backdrop-blur-2xl shadow-[0_12px_40px_rgba(255,42,133,0.15)]"
+        >
+          <!-- Background glow -->
+          <div class="absolute -top-16 -right-16 w-72 h-72 bg-pink-500/15 rounded-full blur-[100px] pointer-events-none"></div>
+
+          <div class="relative z-10 max-w-xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-300 text-xs font-semibold mb-3">
+              <i class="fa-solid fa-key text-[10px]"></i>
+              <span>Host With Dwellio</span>
+            </div>
+
+            <h2 class="zodiac-font text-2xl sm:text-4xl font-light text-white leading-tight">
+              Turn your extraordinary space into
+              <span class="stardom-font text-gradient-pink italic font-normal">unforgettable income.</span>
+            </h2>
+
+            <p class="zodiac-font text-xs sm:text-sm text-zinc-400 mt-3 font-light leading-relaxed">
+              Join our curated community of property owners. Enjoy top-tier guest matching, full listing control, and comprehensive host support.
+            </p>
+
+            <div class="mt-6 flex flex-wrap items-center gap-3">
+              <a
+                href="/listings/host"
+                class="px-6 py-3 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-red-500 text-white font-bold text-xs tracking-wide shadow-[0_0_20px_rgba(255,42,133,0.5)] hover:scale-102 active:scale-98 transition flex items-center gap-2"
+              >
+                <i class="fa-solid fa-plus text-[10px]"></i>
+                <span>Publish Your Property</span>
+              </a>
+              <a
+                href="/listings"
+                class="px-5 py-3 rounded-full bg-white/[0.03] border border-white/10 text-zinc-300 hover:text-white hover:border-pink-500/40 text-xs font-medium transition"
+              >
+                Browse current stays
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <%- include("includes/footer.ejs") %>
+  </body>
+</html>

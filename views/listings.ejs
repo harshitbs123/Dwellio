@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <%- include("includes/head.ejs", { title: "Explore All Stays" }) %>
+  </head>
+  <body class="bg-[#030305] text-white selection:bg-pink-500 selection:text-white">
+    <%- include("includes/navbar.ejs", { active: "listings" }) %>
+
+    <div class="relative overflow-hidden min-h-screen">
+      <!-- Background ambient glow -->
+      <div
+        class="absolute top-0 right-1/4 w-[600px] h-[350px] bg-pink-500/8 rounded-full blur-[140px] pointer-events-none -z-10"
+      ></div>
+
+      <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <!-- PAGE HEADER -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-5 pb-6 border-b border-white/[0.06]">
+          <div>
+            <h1 class="zodiac-font text-3xl sm:text-5xl font-light tracking-tight">
+              All Listings on
+              <span class="stardom-font text-gradient-pink italic font-normal">Dwellio..</span>
+            </h1>
+            <p class="zodiac-font text-xs sm:text-sm text-zinc-400 mt-2 font-light">
+              Discover unique stays, luxury villas, and scenic escapes curated for memory making.
+            </p>
+          </div>
+
+          <!-- Add Listing Action -->
+          <a
+            href="/listings/host"
+            class="self-start md:self-auto inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-red-500 text-white font-semibold text-xs hover:shadow-[0_0_18px_rgba(255,42,133,0.45)] hover:scale-102 active:scale-98 transition shadow-sm"
+          >
+            <i class="fa-solid fa-plus text-[10px]"></i>
+            <span>Host New Property</span>
+          </a>
+        </div>
+
+        <!-- MINIMAL GLASS SEARCH & FILTER BAR -->
+        <div class="my-7 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+          <!-- Search Form -->
+          <form action="/listings" method="GET" class="flex-1 max-w-md">
+            <div class="relative flex items-center">
+              <i class="fa-solid fa-magnifying-glass absolute left-3.5 text-pink-400 text-xs"></i>
+              <input
+                type="text"
+                name="search"
+                placeholder="Search by title, city, or country..."
+                value="<%= typeof search !== 'undefined' ? search : '' %>"
+                class="w-full bg-white/[0.03] border border-white/[0.08] hover:border-pink-500/30 rounded-full pl-9 pr-20 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-pink-500/60 focus:bg-zinc-950/60 transition backdrop-blur-xl shadow-sm"
+              />
+              <% if (typeof search !== 'undefined' && search) { %>
+                <a
+                  href="/listings"
+                  class="absolute right-12 text-zinc-500 hover:text-white text-xs px-2 py-1"
+                  title="Clear search"
+                >
+                  <i class="fa-solid fa-xmark text-xs"></i>
+                </a>
+              <% } %>
+              <button
+                type="submit"
+                class="absolute right-1.5 px-3 py-1 rounded-full bg-pink-500/15 hover:bg-pink-500 hover:text-white text-pink-300 text-[11px] font-semibold border border-pink-500/25 transition cursor-pointer"
+              >
+                Find
+              </button>
+            </div>
+          </form>
+
+          <!-- Quick Category Filters (Minimal Glass Pills) -->
+          <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1 text-xs zodiac-font">
+            <a
+              href="/listings"
+              class="px-3.5 py-1.5 rounded-full border text-xs <%= (!search) ? 'bg-pink-500/20 text-pink-300 font-medium border-pink-500/40 shadow-[0_0_12px_rgba(255,42,133,0.25)]' : 'bg-white/[0.02] text-zinc-400 border-white/[0.06] hover:border-pink-500/30' %> transition flex-shrink-0"
+            >
+              All
+            </a>
+            <a
+              href="/listings?search=Villa"
+              class="px-3.5 py-1.5 rounded-full border text-xs <%= (search === 'Villa') ? 'bg-pink-500/20 text-pink-300 font-medium border-pink-500/40 shadow-[0_0_12px_rgba(255,42,133,0.25)]' : 'bg-white/[0.02] text-zinc-400 border-white/[0.06] hover:border-pink-500/30' %> transition flex-shrink-0"
+            >
+              Villas
+            </a>
+            <a
+              href="/listings?search=Beach"
+              class="px-3.5 py-1.5 rounded-full border text-xs <%= (search === 'Beach') ? 'bg-pink-500/20 text-pink-300 font-medium border-pink-500/40 shadow-[0_0_12px_rgba(255,42,133,0.25)]' : 'bg-white/[0.02] text-zinc-400 border-white/[0.06] hover:border-pink-500/30' %> transition flex-shrink-0"
+            >
+              Beachfront
+            </a>
+            <a
+              href="/listings?search=Resort"
+              class="px-3.5 py-1.5 rounded-full border text-xs <%= (search === 'Resort') ? 'bg-pink-500/20 text-pink-300 font-medium border-pink-500/40 shadow-[0_0_12px_rgba(255,42,133,0.25)]' : 'bg-white/[0.02] text-zinc-400 border-white/[0.06] hover:border-pink-500/30' %> transition flex-shrink-0"
+            >
+              Resorts
+            </a>
+            <a
+              href="/listings?search=Mountain"
+              class="px-3.5 py-1.5 rounded-full border text-xs <%= (search === 'Mountain') ? 'bg-pink-500/20 text-pink-300 font-medium border-pink-500/40 shadow-[0_0_12px_rgba(255,42,133,0.25)]' : 'bg-white/[0.02] text-zinc-400 border-white/[0.06] hover:border-pink-500/30' %> transition flex-shrink-0"
+            >
+              Mountains
+            </a>
+          </div>
+        </div>
+
+        <!-- SEARCH RESULT SUMMARY -->
+        <% if (typeof search !== 'undefined' && search) { %>
+          <div class="mb-5 flex items-center justify-between text-xs text-zinc-400">
+            <p>
+              Showing results for: <span class="text-pink-400 font-medium">"<%= search %>"</span>
+              (<%= Listings.length %> found)
+            </p>
+            <a href="/listings" class="text-pink-400 hover:underline">Clear filter</a>
+          </div>
+        <% } %>
+
+        <!-- LISTINGS GRID -->
+        <% if (typeof Listings !== 'undefined' && Listings.length > 0) { %>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+            <% for (let Listing of Listings) { %>
+              <a href="/listings/<%= Listing._id %>" class="group block">
+                <article
+                  class="rounded-3xl bg-white/[0.02] border border-white/[0.07] backdrop-blur-xl p-3.5 transition-all duration-300 hover:border-pink-500/50 hover:shadow-[0_10px_35px_rgba(255,42,133,0.22)] hover:-translate-y-1 flex flex-col h-full relative"
+                >
+                  <!-- Image Wrap -->
+                  <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-zinc-900 mb-3.5">
+                    <img
+                      src="<%= Listing.image %>"
+                      alt="<%= Listing.title %>"
+                      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-104"
+                      loading="lazy"
+                      onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80';"
+                    />
+
+                    <!-- Top Left Badge -->
+                    <div class="absolute top-2.5 left-2.5">
+                      <span class="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-black/60 backdrop-blur-md text-pink-300 border border-pink-500/30 flex items-center gap-1 shadow-md">
+                        <i class="fa-solid fa-star text-pink-400 text-[9px]"></i>
+                        <span>Superhost</span>
+                      </span>
+                    </div>
+
+                    <!-- Top Right Wishlist Heart -->
+                    <button
+                      type="button"
+                      class="absolute top-2.5 right-2.5 w-7 h-7 rounded-full bg-black/50 backdrop-blur-md border border-white/15 text-white/80 hover:text-pink-400 hover:scale-110 flex items-center justify-center transition cursor-pointer"
+                      aria-label="Wishlist property"
+                    >
+                      <i class="fa-regular fa-heart text-[11px]"></i>
+                    </button>
+                  </div>
+
+                  <!-- Content Details -->
+                  <div class="flex-1 flex flex-col justify-between">
+                    <div>
+                      <h2 class="stardom-font text-lg text-gradient-pink font-light tracking-wide line-clamp-1 group-hover:opacity-95">
+                        <%= Listing.title %>
+                      </h2>
+
+                      <p class="zodiac-font text-xs text-zinc-400 mt-1 flex items-center gap-1.5 font-light">
+                        <i class="fa-solid fa-location-dot text-pink-500 text-[10px]"></i>
+                        <span class="line-clamp-1"><%= Listing.location %>, <%= Listing.country %></span>
+                      </p>
+
+                      <p class="zodiac-font text-xs text-zinc-400/80 mt-2 line-clamp-2 font-thin leading-relaxed">
+                        <%= Listing.description %>
+                      </p>
+                    </div>
+
+                    <!-- Card Bottom Strip with Price -->
+                    <div class="mt-4 pt-3 border-t border-white/[0.05] flex items-center justify-between">
+                      <div class="flex items-baseline gap-1">
+                        <span class="px-2.5 py-0.5 rounded-xl bg-black/60 border border-pink-500/30 text-white font-bold text-sm shadow-[0_0_10px_rgba(255,42,133,0.15)]">
+                          <span class="text-gradient-pink">₹<%= Number(Listing.price).toLocaleString("en-IN") %></span>
+                        </span>
+                        <span class="text-[11px] text-zinc-500 font-light zodiac-font">/ night</span>
+                      </div>
+
+                      <span class="text-xs font-medium text-pink-400 group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                        <span>Details</span>
+                        <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                      </span>
+                    </div>
+                  </div>
+                </article>
+              </a>
+            <% } %>
+          </div>
+        <% } else { %>
+          <!-- Empty State (Minimal Glass) -->
+          <div class="text-center py-16 rounded-3xl border border-white/[0.08] bg-white/[0.02] backdrop-blur-xl p-8 max-w-lg mx-auto my-8">
+            <div class="w-12 h-12 rounded-2xl bg-pink-500/10 border border-pink-500/25 flex items-center justify-center text-pink-400 text-lg mx-auto mb-3">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <h2 class="zodiac-font text-xl font-light text-white">No Stays Found</h2>
+            <p class="zodiac-font text-xs text-zinc-400 mt-1.5 mb-5 font-light">
+              We couldn't find any listings matching your search. Try another location or host your own property!
+            </p>
+            <div class="flex items-center justify-center gap-3">
+              <a
+                href="/listings"
+                class="px-4 py-2 rounded-full bg-white/[0.04] border border-white/10 text-white text-xs font-medium hover:border-pink-500/40 transition"
+              >
+                Clear Filters
+              </a>
+              <a
+                href="/listings/host"
+                class="px-4 py-2 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 text-white text-xs font-semibold shadow-[0_0_15px_rgba(255,42,133,0.4)]"
+              >
+                + Add Listing
+              </a>
+            </div>
+          </div>
+        <% } %>
+      </main>
+    </div>
+
+    <%- include("includes/footer.ejs") %>
+  </body>
+</html>

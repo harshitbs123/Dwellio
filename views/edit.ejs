@@ -1,265 +1,219 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dwellio</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    />
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <%- include("includes/head.ejs", { title: "Edit: " + listing.title }) %>
   </head>
-  <body class="bg-black zodiac-font">
-    <style>
-      /* zodiac */
-      @font-face {
-        font-family: "zodiac";
-        src: url("./assets/fonts/Zodiak-Thin.otf") format("opentype");
-        font-weight: 100;
-      }
+  <body class="bg-[#030305] text-white selection:bg-pink-500 selection:text-white">
+    <%- include("includes/navbar.ejs") %>
 
-      @font-face {
-        font-family: "zodiac";
-        src: url("./assets/fonts/Zodiak-Light.otf") format("opentype");
-        font-weight: 300;
-      }
-
-      @font-face {
-        font-family: "zodiac";
-        src: url("./assets/fonts/Zodiak-Regular.otf") format("opentype");
-        font-weight: 400;
-      }
-
-      @font-face {
-        font-family: "zodiac";
-        src: url("./assets/fonts/Zodiak-Bold.otf") format("opentype");
-        font-weight: 700;
-      }
-
-      @font-face {
-        font-family: "zodiac";
-        src: url("./assets/fonts/Zodiak-Extrabold.otf") format("opentype");
-        font-weight: 800;
-      }
-      .zodiac-font {
-        font-family: "zodiac", sans-serif;
-      }
-    </style>
-
-    <div class="bg-black p-5 zodiac-font font-light">
-      <nav
-        class="flex justify-between mx-10 items-center p-4 rounded-full bg-gradient-to-br from-pink-500 via-rose-400 to-red-300"
-      >
-        <div class="flex-1 mx-5">
-          <a href="/listings">
-            <span class="text-white bg-black px-4 py-2 rounded-xl">
-              <i class="text-[#d9659a] text-2xl">D</i>wellio
-            </span>
-          </a>
-        </div>
-        <div
-          class="flex flex-1 justify-center text-sm text-white border p-4 rounded-full bg-red-800/10 backdrop-blur-sm border border-white/40"
-        >
-          <div class="mx-4">
-            <a href="/listings">All</a>
-          </div>
-          <div class="mx-4">Homes</div>
-          <div class="mx-4">Resorts</div>
-          <div class="mx-4">
-            <a href="/listings/host">Host</a>
-          </div>
-        </div>
-        <div class="flex items-center flex-1 justify-end text-white">
-          <div
-            class="mx-4 border p-2 px-3 text-sm rounded-full bg-red-800/10 backdrop-blur-sm border border-white/40"
-          >
-            <a href="/listings/host"><span> Become a host </span></a>
-          </div>
-          <div
-            class="mx-2 p-3 rounded-full bg-black h-10 w-10 flex items-center justify-center"
-          >
-            <i class="fa-solid fa-globe text-[#d9659a]"></i>
-          </div>
-          <div
-            class="mx-2 p-3 rounded-full bg-black h-10 w-10 flex items-center justify-center"
-          >
-            <i class="fa-solid fa-bars-staggered text-[#d9659a]"></i>
-          </div>
-        </div>
-      </nav>
-    </div>
-    <!-- content -->
-    <div class="content w-[80%] mx-auto text-white zodiac-font">
-      <!-- listing head -->
-      <div class="listingsheading mt-5">
-        <h1 class="zodiac-font text-4xl font-light">
-          Host your hotel on
-          <span
-            class="stardom-font ( bg-gradient-to-r from-pink-500 to-red-400 ) px-2 rounded-xl font-light"
-            ><i class="font-bold">D</i>wellio now..</span
-          >
-        </h1>
-      </div>
-      <!-- Host info enter box-->
+    <div class="relative overflow-hidden min-h-screen">
+      <!-- Background ambient glow -->
       <div
-        class="border flex justify-center items-center m-2 mt-7 p-3 rounded-xl bg-pink-300/10 hover:bg-pink-600/10 transition duration-300 zodiac-font"
-      >
-        <div class="data mt-2 p-5 flex font-thin flex justify-center items-center">
-          <form action="/listings/<%= listing._id %>?_method=PATCH" method="POST">
-            <div class="title">
-              <h1
-                class="mb-4 text-xl bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent"
-              >
-                Hotel Title :
-              </h1>
-              <input
-                type="text"
-                name="listing[title]"
-                placeholder="Enter Title"
-                id=""
-                value="<%= listing.title %>"
-                class="border w-100 h-10 rounded-3xl px-5 py-3 bg-gradient-to-r from-pink-500/10 to-red-500/10"
-              />
+        class="absolute top-10 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-pink-500/8 rounded-full blur-[140px] pointer-events-none -z-10"
+      ></div>
+
+      <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <!-- BREADCRUMBS -->
+        <nav class="flex items-center space-x-2 text-xs text-zinc-500 mb-5 zodiac-font">
+          <a href="/" class="hover:text-pink-300 transition">Home</a>
+          <span class="text-zinc-700">/</span>
+          <a href="/listings" class="hover:text-pink-300 transition">All Stays</a>
+          <span class="text-zinc-700">/</span>
+          <a href="/listings/<%= listing._id %>" class="hover:text-pink-300 transition truncate max-w-xs"><%= listing.title %></a>
+          <span class="text-zinc-700">/</span>
+          <span class="text-pink-400 font-medium">Edit</span>
+        </nav>
+
+        <!-- HEADER -->
+        <div class="text-center max-w-xl mx-auto mb-8">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-pink-500/25 bg-pink-500/10 text-pink-300 text-xs font-semibold mb-3 backdrop-blur-xl">
+            <i class="fa-solid fa-pen-to-square text-[10px] text-pink-400"></i>
+            <span>Property Management</span>
+          </div>
+
+          <h1 class="zodiac-font text-3xl sm:text-4xl font-light text-white tracking-tight">
+            Edit your listing on
+            <span class="stardom-font text-gradient-pink italic font-normal">Dwellio</span>
+          </h1>
+
+          <p class="zodiac-font text-xs sm:text-sm text-zinc-400 mt-2 font-light leading-relaxed">
+            Update pricing, description, photography, or location for <span class="text-white font-medium">"<%= listing.title %>"</span>.
+          </p>
+        </div>
+
+        <!-- EDIT FORM CONTAINER (MINIMAL GLASS) -->
+        <div class="rounded-3xl bg-white/[0.02] border border-white/[0.08] backdrop-blur-2xl p-6 sm:p-8 shadow-[0_15px_45px_rgba(0,0,0,0.6)]">
+          <form action="/listings/<%= listing._id %>?_method=PATCH" method="POST" class="space-y-5">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+              <!-- LEFT COLUMN: TEXT DETAILS -->
+              <div class="space-y-4">
+                <!-- Title Field -->
+                <div>
+                  <label for="title" class="block text-[11px] font-bold uppercase tracking-wider text-pink-400 mb-1.5">
+                    Property Title <span class="text-red-400">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="listing[title]"
+                    id="title"
+                    required
+                    value="<%= listing.title %>"
+                    placeholder="Enter catchy listing title"
+                    class="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-pink-500/60 focus:bg-zinc-950/70 transition"
+                  />
+                </div>
+
+                <!-- Location & Country Side-by-Side -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label for="location" class="block text-[11px] font-bold uppercase tracking-wider text-pink-400 mb-1.5">
+                      Location / City <span class="text-red-400">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="listing[location]"
+                      id="location"
+                      required
+                      value="<%= listing.location %>"
+                      placeholder="Where is it located"
+                      class="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-pink-500/60 focus:bg-zinc-950/70 transition"
+                    />
+                  </div>
+
+                  <div>
+                    <label for="country" class="block text-[11px] font-bold uppercase tracking-wider text-pink-400 mb-1.5">
+                      Country <span class="text-red-400">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="listing[country]"
+                      id="country"
+                      required
+                      value="<%= listing.country %>"
+                      placeholder="Enter Country"
+                      class="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-pink-500/60 focus:bg-zinc-950/70 transition"
+                    />
+                  </div>
+                </div>
+
+                <!-- Nightly Price -->
+                <div>
+                  <label for="price" class="block text-[11px] font-bold uppercase tracking-wider text-pink-400 mb-1.5">
+                    Nightly Price (₹ INR) <span class="text-red-400">*</span>
+                  </label>
+                  <div class="relative flex items-center">
+                    <span class="absolute left-3.5 text-pink-400 font-bold text-xs">₹</span>
+                    <input
+                      type="number"
+                      name="listing[price]"
+                      id="price"
+                      min="500"
+                      required
+                      value="<%= listing.price %>"
+                      placeholder="Price per night"
+                      class="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl pl-8 pr-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-pink-500/60 focus:bg-zinc-950/70 transition"
+                    />
+                  </div>
+                </div>
+
+                <!-- Description Textarea -->
+                <div>
+                  <label for="description" class="block text-[11px] font-bold uppercase tracking-wider text-pink-400 mb-1.5">
+                    Property Description <span class="text-red-400">*</span>
+                  </label>
+                  <textarea
+                    name="listing[description]"
+                    id="description"
+                    rows="4"
+                    required
+                    placeholder="Describe your space..."
+                    class="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-pink-500/60 focus:bg-zinc-950/70 transition leading-relaxed resize-y"
+                  ><%= listing.description %></textarea>
+                </div>
+              </div>
+
+              <!-- RIGHT COLUMN: IMAGE URL & LIVE PREVIEW -->
+              <div class="space-y-4">
+                <div>
+                  <label for="image" class="block text-[11px] font-bold uppercase tracking-wider text-pink-400 mb-1.5">
+                    Cover Image URL
+                  </label>
+                  <input
+                    type="url"
+                    name="listing[image]"
+                    id="image"
+                    value="<%= listing.image %>"
+                    placeholder="Enter image URL/Link"
+                    oninput="updateImagePreview(this.value)"
+                    class="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-pink-500/60 focus:bg-zinc-950/70 transition"
+                  />
+                  <p class="text-[10px] text-zinc-500 mt-1 zodiac-font font-light">
+                    Direct photo link to update your listing's primary image.
+                  </p>
+                </div>
+
+                <!-- Live Preview Card -->
+                <div>
+                  <span class="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-1.5">Current Cover Image</span>
+                  <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-white/[0.08] bg-zinc-900 flex items-center justify-center shadow-inner">
+                    <img
+                      id="previewImg"
+                      src="<%= listing.image %>"
+                      alt="<%= listing.title %>"
+                      class="w-full h-full object-cover transition-all duration-300"
+                      onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80';"
+                    />
+                    <div class="absolute bottom-2.5 left-2.5 px-2.5 py-0.5 rounded-full text-[9px] font-semibold bg-black/70 backdrop-blur-md text-pink-300 border border-pink-500/30">
+                      Live Preview
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Host Note -->
+                <div class="p-3.5 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex items-center gap-2.5 text-xs text-zinc-400">
+                  <i class="fa-solid fa-clock-rotate-left text-pink-400 text-lg flex-shrink-0"></i>
+                  <p class="font-light zodiac-font leading-relaxed text-[11px]">
+                    Changes will immediately reflect on the public listing and search catalog across Dwellio.
+                  </p>
+                </div>
+              </div>
             </div>
-            <div class="description mt-5">
-              <h1
-                class="mb-4 text-xl bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent"
+
+            <!-- SUBMIT & CANCEL BUTTONS -->
+            <div class="pt-5 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-3">
+              <a
+                href="/listings/<%= listing._id %>"
+                class="text-xs text-zinc-400 hover:text-white transition flex items-center gap-1.5 zodiac-font font-light"
               >
-                Description :
-              </h1>
-              <textarea
-                type="text"
-                name="listing[description]"
-                id=""
-                placeholder="Tell us about your property"
-                class="border w-100 rounded-3xl px-5 py-3 bg-gradient-to-r from-pink-500/10 to-red-500/10"
-                rows="4"
-              ><%= listing.description %></textarea>
-            </div>
-            <div class="location mt-5">
-              <h1
-                class="mb-4 text-xl bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent"
+                <i class="fa-solid fa-arrow-left text-[9px]"></i>
+                <span>Cancel changes</span>
+              </a>
+
+              <button
+                type="submit"
+                class="w-full sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-red-500 text-white font-bold text-xs tracking-wide shadow-[0_0_20px_rgba(255,42,133,0.45)] hover:shadow-[0_0_30px_rgba(255,42,133,0.7)] hover:scale-102 active:scale-98 transition cursor-pointer flex items-center justify-center gap-2"
               >
-                Location :
-              </h1>
-              <input
-                type="text"
-                name="listing[location]"
-                id=""
-                placeholder="Where is it located"
-                value="<%= listing.location %>"
-                class="border w-100 h-10 rounded-3xl px-5 py-3 bg-gradient-to-r from-pink-500/10 to-red-500/10"
-              />
-            </div>
-            <div class="country mt-5">
-              <h1
-                class="mb-4 text-xl bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent"
-              >
-                Country :
-              </h1>
-              <input
-                type="text"
-                name="listing[country]"
-                id=""
-                placeholder="Enter Country"
-                value="<%= listing.country %>"
-                class="border w-100 h-10 rounded-3xl px-5 py-3 bg-gradient-to-r from-pink-500/10 to-red-500/10"
-              />
-            </div>
-            <div class="price mt-5">
-              <h1
-                class="mb-4 text-xl bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent"
-              >
-                Hotel Price :
-              </h1>
-              <input
-                type="number"
-                name="listing[price]"
-                id=""
-                placeholder="How much for a night"
-                value="<%= listing.price %>"
-                class="border w-100 h-10 rounded-3xl px-5 py-3 bg-gradient-to-r from-pink-500/10 to-red-500/10"
-              />
-            </div>
-            <div class="image_url mt-5">
-              <h1
-                class="mb-4 text-xl bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent"
-              >
-                Hotel Image URL :
-              </h1>
-              <input
-                type="text"
-                name="listing[image]"
-                id=""
-                placeholder="Show us the establishment"
-                value="<%= listing.image %>"
-                class="border w-100 h-10 rounded-3xl px-5 py-3 bg-gradient-to-r from-pink-500/10 to-red-500/10"
-              />
-            </div>
-            <div class="submit flex align-center justify-center mt-5">
-              <span class="bg-black py-2 rounded-3xl">
-                <button
-                  class="bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent px-7 text-xl font-bold"
-                >
-                  Update Info
-                </button>
-              </span>
+                <i class="fa-solid fa-check text-[11px]"></i>
+                <span>Save and Update Info</span>
+              </button>
             </div>
           </form>
         </div>
-      </div>
+      </main>
     </div>
 
-    <footer
-      class="mt-20 bg-gradient-to-br from-pink-500 via-rose-400 to-red-300 text-white"
-      id="about"
-    >
-      <div
-        class="mx-auto grid w-[80%] gap-10 py-12 md:grid-cols-[1.4fr_1fr] md:items-end"
-      >
-        <div>
-          <p class="stardom-font text-3xl font-light tracking-wide">
-            <span class="border bg-white rounded-2xl px-3 py-1">
-              <span
-                class="bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent"
-              >
-                <i class="font-bold">D</i>wellio
-              </span>
-            </span>
-          </p>
-          <p class="zodiac-font mt-8 text-xs text-white/70">
-            2026 Dwellio. All rights reserved.
-          </p>
-        </div>
-        <div class="grid grid-cols-3 gap-4 text-center">
-          <div
-            class="rounded-2xl border border-white/30 bg-white/15 p-4 backdrop-blur-sm"
-          >
-            <strong class="stardom-font block text-2xl">4.9/5</strong>
-            <span class="zodiac-font mt-1 block text-xs text-white/75"
-              >Average rating</span
-            >
-          </div>
-          <div
-            class="rounded-2xl border border-white/30 bg-white/15 p-4 backdrop-blur-sm"
-          >
-            <strong class="stardom-font block text-2xl">12k+</strong>
-            <span class="zodiac-font mt-1 block text-xs text-white/75"
-              >Places to stay</span
-            >
-          </div>
-          <div
-            class="rounded-2xl border border-white/30 bg-white/15 p-4 backdrop-blur-sm"
-          >
-            <strong class="stardom-font block text-2xl">24/7</strong>
-            <span class="zodiac-font mt-1 block text-xs text-white/75"
-              >Guest support</span
-            >
-          </div>
-        </div>
-      </div>
-    </footer>
+    <script>
+      function updateImagePreview(url) {
+        const img = document.getElementById("previewImg");
+        if (url && url.trim() !== "") {
+          img.src = url;
+          img.onerror = () => {
+            img.src = "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80";
+          };
+        }
+      }
+    </script>
+
+    <%- include("includes/footer.ejs") %>
   </body>
 </html>

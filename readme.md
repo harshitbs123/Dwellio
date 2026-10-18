@@ -1,56 +1,44 @@
 # 🏨 Dwellio
 
-**Dwellio** is a full-stack hotel and vacation rental web application inspired by platforms like Airbnb.
+**Dwellio** is a luxury hotel and vacation rental web application featuring an iconic neon pink and pitch-black dark theme.
 
-Users can browse available properties, view individual listings, while hosts can add new properties and manage existing listings.
+Users can discover extraordinary architectural villas, mountain retreats, and beachfront resorts, view comprehensive property details with interactive pricing calculations, and host and manage their own stays with live photo previews.
 
 ## ✨ Features
 
-* 🏠 Browse all available listings
-* 🔍 View individual property details
-* 🏨 Host/add new properties
-* ✏️ Edit existing listings
-* 🗑️ Delete listings
-* 💾 MongoDB database integration
-* ⚡ Express.js backend
-* 🎨 EJS-based dynamic pages
-* 🔄 RESTful CRUD operations
-* 📱 Responsive UI
-* 🖼️ Property images and listing information
-* 🛡️ Centralized error handling
-* 🔄 Async error handling with `wrapAsync`
-* ⚠️ Custom `ExpressError` class
-* 🚫 Custom 404 page
-* 🔎 Listing not found handling
-* ❌ Invalid MongoDB ObjectId / CastError handling
+* 🌟 **New Homepage (`/`)**: Breathtaking landing experience with hero section, live destination search, trending tags, category explorer, curated stays showcase, and host callout banner.
+* 🏠 **All Listings Catalog (`/listings`)**: Clean responsive grid with search filter (`?search=...`), category tags, and wishlist badges.
+* 🔍 **Luxury Property Show Page (`/listings/:id`)**: High-res photo hero, verified host capsule, amenities grid, location information, and a sticky reservation price breakdown card with instant booking calculation.
+* 🏨 **Host / Add Property (`/listings/host`)**: Polished 2-column creation form with interactive live image preview and one-click photo presets.
+* ✏️ **Edit Listing (`/listings/:id/edit`)**: Pre-filled update form with real-time image preview and safe cancellation actions.
+* 🗑️ **Delete Listing**: Secure removal with client-side confirmation dialog.
+* 💾 **MongoDB Database Integration**: Connected to Mongoose `rentora` database.
+* ⚡ **Express.js Backend**: RESTful CRUD routing with `wrapAsync` and central error middleware.
+* 🎨 **Neon Pink & Black Design System**:
+  - Fonts: Local `Stardom` (editorial headings) & `Zodiak` (light, regular, bold, extrabold body typography).
+  - Floating pill navigation bar with active indicators and responsive mobile drawer.
+  - Signature Dwellio stats footer (4.9/5 Average rating, 12k+ Places to stay, 24/7 Guest support).
+* 🛡️ **Robust Error Handling**:
+  - Friendly neon 404 page for missing routes (`/views/404.ejs`).
+  - Dedicated CastError page for invalid MongoDB ObjectIds (`/views/404Cast.ejs`).
 
 ## 🛠️ Tech Stack
 
 **Frontend**
-
-* HTML
-* Tailwind CSS
-* EJS
-* Font Awesome
+* Tailwind CSS (v4 CDN)
+* EJS (Embedded JavaScript Templates)
+* Font Awesome 6.7.2
+* Plus Jakarta Sans & Google Fonts
+* Custom Local Typefaces: `Stardom` & `Zodiak`
 
 **Backend**
-
 * Node.js
-* Express.js
+* Express.js 5
+* Method Override (PATCH, DELETE)
 
 **Database**
-
 * MongoDB
-* Mongoose
-
-**Other**
-
-* Method Override
-* REST APIs
-* Custom Error Handling
-* Express Middleware
-* wrapAsync
-* ExpressError
+* Mongoose 9
 
 ## 📂 Project Structure
 
@@ -58,159 +46,79 @@ Users can browse available properties, view individual listings, while hosts can
 Dwellio/
 │
 ├── Models/
-│   └── listing.js
+│   └── listing.js          # Mongoose Listing schema & model
 │
 ├── views/
-│   ├── home.ejs
-│   ├── show.ejs
-│   ├── host.ejs
-│   └── edit.ejs
-│   └── 404.ejs
-│   └── 404Cast.ejs
+│   ├── includes/
+│   │   ├── head.ejs        # Shared head with fonts, Tailwind, neon theme CSS
+│   │   ├── navbar.ejs      # Floating pill navigation bar with mobile menu
+│   │   └── footer.ejs      # Signature Dwellio stats & brand footer
+│   ├── landing.ejs         # Homepage (/) with hero section & search
+│   ├── listings.ejs        # All listings catalog (/listings) with search filter
+│   ├── home.ejs            # Alias to listings.ejs for backward compatibility
+│   ├── show.ejs            # Single listing detail page (/listings/:id)
+│   ├── host.ejs            # Add new property form (/listings/host)
+│   ├── edit.ejs            # Edit property form (/listings/:id/edit)
+│   ├── 404.ejs             # Page not found error page
+│   └── 404Cast.ejs         # Invalid listing ID / CastError page
 │
-├── utils/
-│   ├── ExpressError.js
-│   └── wrapAsync.js
+├── init/
+│   ├── data.js             # High quality curated luxury sample listings
+│   └── index.js            # Database seeding script (node init/index.js)
 │
 ├── assets/
-│   └── images/
+│   ├── fonts/              # Stardom & Zodiak font files
+│   └── favicon.png         # Dwellio browser icon
 │
-├── app.js
+├── utils/
+│   ├── ExpressError.js     # Custom error class with status codes
+│   └── wrapAsync.js        # Async wrapper to eliminate try-catch boilerplate
+│
+├── app.js                  # Main Express application & routes
 ├── package.json
 └── README.md
 ```
 
 ## 🚀 Getting Started
 
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/YOUR_USERNAME/dwellio.git
-```
-
-### 2. Navigate into the project
-
-```bash
-cd dwellio
-```
-
-### 3. Install dependencies
+### 1. Install dependencies
 
 ```bash
 npm install
 ```
 
-### 4. Start MongoDB
+### 2. Seed Sample Listings (Optional)
 
-Make sure MongoDB is installed and running locally.
+To populate the database with luxury travel destinations:
 
-The application currently connects to:
-
-```text
-mongodb://127.0.0.1:27017/rentora
+```bash
+node init/index.js
 ```
 
-### 5. Start the server
+### 3. Start the server
 
 ```bash
 node app.js
 ```
 
-Or, if you have nodemon installed:
-
-```bash
-nodemon app.js
-```
-
 The application will run at:
-
 ```text
 http://localhost:3030
 ```
 
 ## 🔗 Routes
 
-| Method | Route                | Description          |
-| ------ | -------------------- | -------------------- |
-| GET    | `/listings`          | Display all listings |
-| GET    | `/listings/host`     | Host a new property  |
-| POST   | `/listings`          | Create a new listing |
-| GET    | `/listings/:id`      | View a listing       |
-| GET    | `/listings/:id/edit` | Edit a listing       |
-| PATCH  | `/listings/:id`      | Update a listing     |
-| DELETE | `/listings/:id`      | Delete a listing     |
-
-## 🗃️ Listing Model
-
-Each property contains information such as:
-
-```text
-title
-description
-price
-location
-country
-image
-```
-
-## 🔄 CRUD Operations
-
-Dwellio implements the complete CRUD workflow:
-
-**Create**
-→ Hosts can add new properties.
-
-**Read**
-→ Users can browse and view property details.
-
-**Update**
-→ Hosts can edit existing property information.
-
-**Delete**
-→ Hosts can remove properties.
-
-## 🎯 Project Goal
-
-The goal of Dwellio is to practice building a complete backend-driven web application using the MERN-style ecosystem, while working with server-side rendering through EJS.
-
-This project helped me understand:
-
-* Express routing
-* RESTful APIs
-* CRUD operations
-* MongoDB database operations
-* Mongoose models and schemas
-* EJS templating
-* HTML forms
-* Method overriding
-* Express middleware
-* Dynamic routes
-* Server-side rendering
-* Error handling in Express
-* Custom error classes
-* Async error handling with wrapAsync
-* 404 error handling
-* Mongoose CastError handling
-
-## 🔮 Future Improvements
-
-* 🔐 User authentication
-* 👤 Host and guest accounts
-* ⭐ Reviews and ratings
-* ❤️ Wishlist/favorites
-* 🔎 Search and filtering
-* 📍 Map integration
-* 💳 Booking and payment system
-* 📅 Property availability calendar
-* ☁️ Cloud image storage
-* 🚀 Deployment with a cloud MongoDB database
-
-## 👨‍💻 Author
-
-**Harshit Prakash**
-
-Built as a full-stack web development project while learning Node.js, Express, MongoDB and EJS.
+| Method | Route                | Description                                    |
+| ------ | -------------------- | ---------------------------------------------- |
+| GET    | `/`                  | Homepage with hero section, search & showcase  |
+| GET    | `/listings`          | Display all listings (supports `?search=...`)  |
+| GET    | `/listings/host`     | Form to host a new property                    |
+| POST   | `/listings`          | Create and save a new listing                  |
+| GET    | `/listings/:id`      | View luxury details and booking calculator     |
+| GET    | `/listings/:id/edit` | Edit property details with live preview        |
+| PATCH  | `/listings/:id`      | Update property information                    |
+| DELETE | `/listings/:id`      | Delete a listing                               |
+| GET    | `/test`              | Quick endpoint to insert a sample test villa   |
 
 ---
-
-⭐ If you like the project, consider giving the repository a star!
+⭐ **Dwellio** — Places worth staying in.

@@ -1,0 +1,138 @@
+<!-- Minimal Glassy Navbar with Original Dwellio Logo -->
+<header class="sticky top-0 z-50 p-3 sm:p-4 backdrop-blur-xl bg-black/40 border-b border-white/[0.04] transition-all duration-300">
+  <nav
+    class="max-w-6xl mx-auto px-4 sm:px-6 py-2 rounded-full bg-zinc-950/50 backdrop-blur-2xl border border-pink-500/25 shadow-[0_8px_32px_0_rgba(255,42,133,0.12)] flex items-center justify-between"
+  >
+    <!-- Original Dwellio Logo -->
+    <div class="flex-shrink-0">
+      <a href="/">
+        <span class="text-white bg-black px-4 py-2 rounded-xl inline-flex items-center tracking-normal shadow-sm hover:shadow-[0_0_15px_rgba(217,101,154,0.4)] transition">
+          <i class="text-[#d9659a] text-2xl stardom-font not-italic">D</i><span class="zodiac-font text-base ml-0.5">wellio</span>
+        </span>
+      </a>
+    </div>
+
+    <!-- Center Navigation Links (Minimal Glass Pill) -->
+    <div
+      class="hidden md:flex items-center text-sm text-white border py-2 px-5 rounded-full bg-red-800/10 backdrop-blur-sm border-white/40 space-x-6 font-light zodiac-font"
+    >
+      <a
+        href="/"
+        class="transition hover:text-pink-300 <%= (typeof active !== 'undefined' && active === 'home') ? 'text-pink-400 font-semibold underline underline-offset-4 decoration-pink-500' : '' %>"
+      >
+        Home
+      </a>
+      <a
+        href="/listings"
+        class="transition hover:text-pink-300 <%= (typeof active !== 'undefined' && active === 'listings') ? 'text-pink-400 font-semibold underline underline-offset-4 decoration-pink-500' : '' %>"
+      >
+        All Stays
+      </a>
+      <a
+        href="/listings?search=Villa"
+        class="transition hover:text-pink-300 <%= (typeof active !== 'undefined' && active === 'villas') ? 'text-pink-400 font-semibold underline underline-offset-4 decoration-pink-500' : '' %>"
+      >
+        Villas
+      </a>
+      <a
+        href="/listings?search=Resort"
+        class="transition hover:text-pink-300 <%= (typeof active !== 'undefined' && active === 'beachfront') ? 'text-pink-400 font-semibold underline underline-offset-4 decoration-pink-500' : '' %>"
+      >
+        Resorts
+      </a>
+      <a
+        href="/listings/host"
+        class="transition hover:text-pink-300 <%= (typeof active !== 'undefined' && active === 'host') ? 'text-pink-400 font-semibold underline underline-offset-4 decoration-pink-500' : '' %>"
+      >
+        Host
+      </a>
+    </div>
+
+    <!-- Right Controls Pill -->
+    <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+      <!-- Become a Host Pill -->
+      <a
+        href="/listings/host"
+        class="border py-2 px-3 sm:px-4 text-xs sm:text-sm rounded-full bg-red-800/10 hover:bg-black/50 backdrop-blur-sm border-white/40 text-white font-medium transition"
+      >
+        <span>Become a host</span>
+      </a>
+
+      <!-- Original Globe Icon -->
+      <a
+        href="/listings"
+        class="rounded-full bg-black h-9 w-9 sm:h-10 sm:w-10 flex items-center justify-center border border-white/10 hover:border-pink-500/40 hover:shadow-[0_0_12px_rgba(217,101,154,0.3)] transition"
+        title="Explore all stays"
+      >
+        <i class="fa-solid fa-globe text-[#d9659a] text-sm"></i>
+      </a>
+
+      <!-- Original Bars Toggle -->
+      <button
+        id="mobileMenuBtn"
+        type="button"
+        class="md:hidden rounded-full bg-black h-9 w-9 sm:h-10 sm:w-10 flex items-center justify-center border border-white/10 hover:border-pink-500/40 text-[#d9659a] transition cursor-pointer"
+        aria-label="Toggle navigation menu"
+      >
+        <i class="fa-solid fa-bars-staggered text-sm"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Dropdown Navigation -->
+  <div
+    id="mobileMenu"
+    class="hidden md:hidden max-w-6xl mx-auto mt-2 p-4 rounded-3xl bg-zinc-950/90 border border-pink-500/25 backdrop-blur-2xl shadow-[0_15px_40px_rgba(0,0,0,0.85)] transition-all"
+  >
+    <div class="flex flex-col space-y-2 zodiac-font text-sm text-zinc-300">
+      <a
+        href="/"
+        class="px-4 py-2.5 rounded-xl hover:bg-pink-500/10 hover:text-pink-300 transition flex items-center justify-between"
+      >
+        <span>Home</span>
+        <i class="fa-solid fa-chevron-right text-xs text-pink-500/50"></i>
+      </a>
+      <a
+        href="/listings"
+        class="px-4 py-2.5 rounded-xl hover:bg-pink-500/10 hover:text-pink-300 transition flex items-center justify-between"
+      >
+        <span>All Stays</span>
+        <i class="fa-solid fa-chevron-right text-xs text-pink-500/50"></i>
+      </a>
+      <a
+        href="/listings?search=Villa"
+        class="px-4 py-2.5 rounded-xl hover:bg-pink-500/10 hover:text-pink-300 transition flex items-center justify-between"
+      >
+        <span>Villas</span>
+        <i class="fa-solid fa-chevron-right text-xs text-pink-500/50"></i>
+      </a>
+      <a
+        href="/listings?search=Resort"
+        class="px-4 py-2.5 rounded-xl hover:bg-pink-500/10 hover:text-pink-300 transition flex items-center justify-between"
+      >
+        <span>Resorts</span>
+        <i class="fa-solid fa-chevron-right text-xs text-pink-500/50"></i>
+      </a>
+      <a
+        href="/listings/host"
+        class="px-4 py-2.5 rounded-xl bg-pink-500/15 border border-pink-500/35 text-pink-300 font-semibold transition flex items-center justify-between"
+      >
+        <span class="flex items-center gap-2">
+          <i class="fa-solid fa-plus text-xs"></i>
+          Host Your Property
+        </span>
+        <i class="fa-solid fa-arrow-right text-xs"></i>
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const mobileBtn = document.getElementById("mobileMenuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+  if (mobileBtn && mobileMenu) {
+    mobileBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+  }
+</script>

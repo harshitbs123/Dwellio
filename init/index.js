@@ -4,20 +4,25 @@ const List = require("../Models/listing.js");
 
 async function main() {
   await mongoose.connect("mongodb://127.0.0.1:27017/rentora");
-};
+}
 
 main()
-  .then((res) => {
-    console.log("connected to mongoose");
+  .then(async () => {
+    console.log("Connected to MongoDB successfully");
+    await initDB();
   })
   .catch((err) => {
-    console.log("error in mongoose");
+    console.error("Error connecting to MongoDB:", err);
   });
 
-const initDB  = async () => {
+const initDB = async () => {
+  try {
     await List.deleteMany({});
-    await List.insertMany(initData.data);
-    console.log("data was initialised");
+    await List.insertMany(data.data);
+    console.log("Sample listings data successfully initialized in Dwellio database!");
+  } catch (e) {
+    console.error("Failed to initialize data:", e);
+  } finally {
+    await mongoose.connection.close();
+  }
 };
-
-initDB();

@@ -1,162 +1,54 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dwellio</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <%- include("includes/head.ejs", { title: "Page Not Found (404)" }) %>
   </head>
-  <body class="bg-black">
-    <style>
-      /* zodiac */
-      @font-face {
-        font-family: "zodiac";
-        src: url("./assets/fonts/Zodiak-Thin.otf") format("opentype");
-        font-weight: 100;
-      }
+  <body class="bg-[#030305] text-white selection:bg-pink-500 selection:text-white">
+    <%- include("includes/navbar.ejs") %>
 
-      @font-face {
-        font-family: "zodiac";
-        src: url("./assets/fonts/Zodiak-Light.otf") format("opentype");
-        font-weight: 300;
-      }
+    <div class="relative overflow-hidden min-h-[70vh] flex items-center justify-center px-4 py-16">
+      <!-- Background ambient glow -->
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-pink-500/10 rounded-full blur-[140px] pointer-events-none -z-10"
+      ></div>
 
-      @font-face {
-        font-family: "zodiac";
-        src: url("./assets/fonts/Zodiak-Regular.otf") format("opentype");
-        font-weight: 400;
-      }
-
-      @font-face {
-        font-family: "zodiac";
-        src: url("./assets/fonts/Zodiak-Bold.otf") format("opentype");
-        font-weight: 700;
-      }
-
-      @font-face {
-        font-family: "zodiac";
-        src: url("./assets/fonts/Zodiak-Extrabold.otf") format("opentype");
-        font-weight: 800;
-      }
-      .zodiac-font {
-        font-family: "zodiac", sans-serif;
-      }
-    </style>
-
-    <div class="bg-black p-5 zodiac-font font-light">
-      <nav
-        class="flex justify-between mx-10 items-center p-4 rounded-full bg-gradient-to-br from-pink-500 via-rose-400 to-red-300"
+      <div
+        class="max-w-md w-full text-center p-8 rounded-3xl bg-white/[0.02] border border-white/[0.08] backdrop-blur-2xl shadow-[0_15px_45px_rgba(0,0,0,0.6)]"
       >
-        <div class="flex-1 mx-5">
-          <a href="/listings">
-            <span class="text-white bg-black px-4 py-2 rounded-xl">
-              <i class="text-[#d9659a] text-2xl">D</i>wellio
-            </span>
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-pink-500/25 bg-pink-500/10 text-pink-300 text-xs font-semibold mb-3">
+          <i class="fa-solid fa-triangle-exclamation text-pink-400 text-[10px]"></i>
+          <span>Error 404</span>
+        </div>
+
+        <h1 class="stardom-font text-6xl sm:text-7xl font-normal text-gradient-pink tracking-tight my-2">
+          404
+        </h1>
+
+        <h2 class="zodiac-font text-xl sm:text-2xl font-light text-white mt-2">
+          Page not found on Dwellio
+        </h2>
+
+        <p class="zodiac-font text-xs text-zinc-400 mt-2 font-light leading-relaxed max-w-sm mx-auto">
+          The sanctuary or destination you are searching for might have been moved, renamed, or is currently off the grid.
+        </p>
+
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+          <a
+            href="/"
+            class="px-6 py-2.5 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-red-500 text-white font-semibold text-xs shadow-[0_0_18px_rgba(255,42,133,0.45)] hover:scale-102 active:scale-98 transition"
+          >
+            Return to Homepage
+          </a>
+          <a
+            href="/listings"
+            class="px-5 py-2.5 rounded-full bg-white/[0.03] border border-white/10 text-zinc-300 hover:text-white hover:border-pink-500/40 text-xs font-medium transition"
+          >
+            Explore All Stays
           </a>
         </div>
-        <div
-          class="flex flex-1 justify-center text-sm text-white border p-4 rounded-full bg-red-800/10 backdrop-blur-sm border border-white/40"
-        >
-          <div class="mx-4">
-            <a href="/listings">All</a>
-          </div>
-          <div class="mx-4">Homes</div>
-          <div class="mx-4">Resorts</div>
-          <div class="mx-4">
-            <a href="/listings/host">Host</a>
-          </div>
-        </div>
-        <div class="flex items-center flex-1 justify-end text-white">
-          <div
-            class="mx-4 border p-2 px-3 text-sm rounded-full bg-red-800/10 backdrop-blur-sm border border-white/40"
-          >
-            <a href="/listings/host"><span> Become a host </span></a>
-          </div>
-          <div
-            class="mx-2 p-3 rounded-full bg-black h-10 w-10 flex items-center justify-center"
-          >
-            <i class="fa-solid fa-globe text-[#d9659a]"></i>
-          </div>
-          <div
-            class="mx-2 p-3 rounded-full bg-black h-10 w-10 flex items-center justify-center"
-          >
-            <i class="fa-solid fa-bars-staggered text-[#d9659a]"></i>
-          </div>
-        </div>
-      </nav>
-    </div>
-    <!-- 404 -->
-    <div
-      class="w-screen h-[70vh] flex items-center justify-center bg-black mt-10"
-    >
-      <div
-        class="w-[50vw] flex items-center justify-center flex-col p-50 text-white border border-white rounded-3xl bg-gradient-to-br from-pink-500 via-rose-400 to-red-300"
-      >
-        <div><h1 class="text-9xl font-bold">404</h1></div>
-
-        <div class="flex">
-          <div class=" items-center flex text-5xl mr-3"><i class="fa-solid fa-paw"></i></div>
-          <div class=" ml-3 font-bold">
-            <p>UH OH...</p>
-            <p>PAGE NOT FOUND</p>
-          </div>
-        </div>
       </div>
     </div>
 
-    <footer
-      class="mt-10 bg-gradient-to-br from-pink-500 via-rose-400 to-red-300 text-white"
-      id="about"
-    >
-      <div
-        class="mx-auto grid w-[80%] gap-10 py-12 md:grid-cols-[1.4fr_1fr] md:items-end"
-      >
-        <div>
-          <p class="stardom-font text-3xl font-light tracking-wide">
-            <span class="border bg-white rounded-2xl px-3 py-1">
-              <span
-                class="bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent"
-              >
-                <i class="font-bold">D</i>wellio
-              </span>
-            </span>
-          </p>
-          <p class="zodiac-font mt-8 text-xs text-white/70">
-            2026 Dwellio. All rights reserved.
-          </p>
-        </div>
-        <div class="grid grid-cols-3 gap-4 text-center">
-          <div
-            class="rounded-2xl border border-white/30 bg-white/15 p-4 backdrop-blur-sm"
-          >
-            <strong class="stardom-font block text-2xl">4.9/5</strong>
-            <span class="zodiac-font mt-1 block text-xs text-white/75"
-              >Average rating</span
-            >
-          </div>
-          <div
-            class="rounded-2xl border border-white/30 bg-white/15 p-4 backdrop-blur-sm"
-          >
-            <strong class="stardom-font block text-2xl">12k+</strong>
-            <span class="zodiac-font mt-1 block text-xs text-white/75"
-              >Places to stay</span
-            >
-          </div>
-          <div
-            class="rounded-2xl border border-white/30 bg-white/15 p-4 backdrop-blur-sm"
-          >
-            <strong class="stardom-font block text-2xl">24/7</strong>
-            <span class="zodiac-font mt-1 block text-xs text-white/75"
-              >Guest support</span
-            >
-          </div>
-        </div>
-      </div>
-    </footer>
+    <%- include("includes/footer.ejs") %>
   </body>
 </html>

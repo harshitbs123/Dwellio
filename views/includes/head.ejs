@@ -1,0 +1,218 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title><%= typeof title !== 'undefined' ? title + ' · Dwellio' : 'Dwellio | Places Worth Staying In' %></title>
+<link rel="icon" type="image/png" href="/favicon.png" />
+
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+<!-- FontAwesome Icons -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+/>
+
+<!-- Google Fonts for crisp minimalist typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+
+<style>
+  /* Custom Local Fonts */
+  @font-face {
+    font-family: "stardom";
+    src: url("/fonts/Stardom-Regular.otf") format("opentype"),
+         url("/assets/fonts/Stardom-Regular.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "zodiac";
+    src: url("/fonts/Zodiak-Thin.otf") format("opentype"),
+         url("/assets/fonts/Zodiak-Thin.otf") format("opentype");
+    font-weight: 100;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "zodiac";
+    src: url("/fonts/Zodiak-Light.otf") format("opentype"),
+         url("/assets/fonts/Zodiak-Light.otf") format("opentype");
+    font-weight: 300;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "zodiac";
+    src: url("/fonts/Zodiak-Regular.otf") format("opentype"),
+         url("/assets/fonts/Zodiak-Regular.otf") format("opentype");
+    font-weight: 400;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "zodiac";
+    src: url("/fonts/Zodiak-Bold.otf") format("opentype"),
+         url("/assets/fonts/Zodiak-Bold.otf") format("opentype");
+    font-weight: 700;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "zodiac";
+    src: url("/fonts/Zodiak-Extrabold.otf") format("opentype"),
+         url("/assets/fonts/Zodiak-Extrabold.otf") format("opentype");
+    font-weight: 800;
+    font-display: swap;
+  }
+
+  .stardom-font {
+    font-family: "stardom", serif;
+  }
+
+  .zodiac-font {
+    font-family: "zodiac", serif;
+  }
+
+  body {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    background-color: #030305;
+    color: #ffffff;
+    overflow-x: hidden;
+  }
+
+  /* Vice City Neon Palette Variables */
+  :root {
+    --neon-pink: #ff2a85;
+    --neon-magenta: #ec4899;
+    --neon-rose: #f43f5e;
+    --neon-glow: rgba(255, 42, 133, 0.4);
+    --glass-bg: rgba(14, 14, 20, 0.55);
+    --glass-border: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Vice City Gradient Text */
+  .text-gradient-pink {
+    background: linear-gradient(135deg, #ff2a85 0%, #ec4899 45%, #fb7185 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gradient-vice {
+    background: linear-gradient(135deg, #ff2a85 0%, #d946ef 50%, #f43f5e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Minimal Glass Components */
+  .glass-panel {
+    background: rgba(10, 10, 16, 0.55);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-card {
+    background: rgba(12, 12, 18, 0.45);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .glass-card:hover {
+    border-color: rgba(255, 42, 133, 0.4);
+    box-shadow: 0 10px 35px -5px rgba(255, 42, 133, 0.22);
+    transform: translateY(-2px);
+  }
+
+  .glass-pill {
+    background: rgba(255, 255, 255, 0.035);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+  }
+
+  .glass-pill:hover {
+    background: rgba(255, 42, 133, 0.08);
+    border-color: rgba(255, 42, 133, 0.35);
+  }
+
+  .glass-button-neon {
+    background: linear-gradient(135deg, rgba(255, 42, 133, 0.85) 0%, rgba(244, 63, 94, 0.85) 100%);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 20px rgba(255, 42, 133, 0.4);
+    transition: all 0.25s ease;
+  }
+
+  .glass-button-neon:hover {
+    box-shadow: 0 0 30px rgba(255, 42, 133, 0.7);
+    transform: scale(1.02);
+  }
+
+  .glass-button-ghost {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: all 0.25s ease;
+  }
+
+  .glass-button-ghost:hover {
+    background: rgba(255, 42, 133, 0.1);
+    border-color: rgba(255, 42, 133, 0.45);
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(255, 42, 133, 0.25);
+  }
+
+  /* Minimal Glass Inputs */
+  .glass-input {
+    background: rgba(15, 15, 22, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    color: #ffffff;
+    transition: all 0.25s ease;
+  }
+
+  .glass-input:focus {
+    outline: none;
+    border-color: rgba(255, 42, 133, 0.6);
+    background: rgba(20, 20, 30, 0.75);
+    box-shadow: 0 0 20px rgba(255, 42, 133, 0.25);
+  }
+
+  /* Glassy Pink Vice City Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(5, 5, 8, 0.6);
+    backdrop-filter: blur(12px);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(255, 42, 133, 0.45) 0%, rgba(236, 72, 153, 0.25) 100%);
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 12px rgba(255, 42, 133, 0.35);
+    backdrop-filter: blur(8px);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, rgba(255, 42, 133, 0.8) 0%, rgba(244, 63, 94, 0.6) 100%);
+    box-shadow: 0 0 18px rgba(255, 42, 133, 0.7);
+  }
+
+  /* Ambient radial background light */
+  .ambient-radial-glow {
+    background: radial-gradient(
+      circle at 50% -10%,
+      rgba(255, 42, 133, 0.15) 0%,
+      rgba(236, 72, 153, 0.05) 40%,
+      transparent 70%
+    );
+  }
+</style>
