@@ -99,7 +99,7 @@ app.post(
   }),
 );
 
-// Review Route
+// POST/SHOW Review Route
 app.post(
   "/listings/:id/reviews",
   wrapAsync(async (req, res, next) => {
@@ -118,6 +118,24 @@ app.post(
 
     res.redirect(`/listings/${id}`);
   }),
+);
+
+// DELETE REVIEW
+
+app.delete(
+  "/listings/:id/reviews/:reviewId",
+  wrapAsync(async (req, res) => {
+    let { id, reviewId } = req.params;
+
+    await Listing.findByIdAndUpdate(
+      id,
+      { $pull: { reviews: reviewId } }
+    );
+
+    await Review.findByIdAndDelete(reviewId);
+
+    res.redirect(`/listings/${id}`);
+  })
 );
 
 // 4. Show Single Listing Route
