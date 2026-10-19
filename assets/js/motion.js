@@ -34,7 +34,7 @@
   }
 
   /* --------------------------------------------------------------------------
-     1. LENIS SMOOTH SCROLLING (LIGHTWEIGHT & UNIFIED TICKER)
+     1. LENIS SMOOTH SCROLLING (COMPACT & LAG-FREE)
      -------------------------------------------------------------------------- */
   function initLenis() {
     if (prefersReducedMotion || typeof Lenis === 'undefined') {
@@ -43,45 +43,31 @@
 
     try {
       const lenis = new Lenis({
-        duration: 0.9,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        orientation: 'vertical',
-        gestureOrientation: 'vertical',
+        lerp: 0.1, // Fast, natural 60/120fps momentum without rubber-band lag
         smoothWheel: true,
-        wheelMultiplier: 1.0,
-        touchMultiplier: 1.0,
-        syncTouch: false, // Let mobile touch scroll natively to save CPU/battery
       });
 
-      // Synchronize with GSAP ScrollTrigger ticker in ONE shared loop
-      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        gsap.registerPlugin(ScrollTrigger);
-
-        lenis.on('scroll', ScrollTrigger.update);
-
-        gsap.ticker.add((time) => {
-          lenis.raf(time * 1000);
-        });
-
-        // Safe lag smoothing prevents CPU spikes on frame drops
-        gsap.ticker.lagSmoothing(500, 33);
-      } else {
-        function raf(time) {
-          lenis.raf(time);
-          requestAnimationFrame(raf);
-        }
+      // Direct display vsync loop
+      function raf(time) {
+        lenis.raf(time);
         requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+
+      // Sync with ScrollTrigger
+      if (typeof ScrollTrigger !== 'undefined') {
+        lenis.on('scroll', ScrollTrigger.update);
       }
 
       // Smooth internal anchor jumps (#about, etc.)
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener('click', function (e) {
-          const href = this.getAttribute('href');
+        anchor.addEventListener('click', (e) => {
+          const href = anchor.getAttribute('href');
           if (href && href.length > 1) {
             const target = document.querySelector(href);
             if (target) {
               e.preventDefault();
-              lenis.scrollTo(target, { offset: -70, duration: 0.9 });
+              lenis.scrollTo(target, { offset: -70 });
             }
           }
         });
@@ -90,7 +76,7 @@
       window.dwellioLenis = lenis;
       return lenis;
     } catch (e) {
-      console.warn('Lenis initialization bypassed:', e);
+      console.warn('Lenis bypass:', e);
       return null;
     }
   }
