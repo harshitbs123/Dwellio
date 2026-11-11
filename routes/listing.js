@@ -3,6 +3,8 @@ const router = express.Router();
 const Listing = require("../Models/listing");
 const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/ExpressError");
+const session = require("express-session");
+const flash = require("connect-flash");
 
 // Index: All listings & search
 router.get(
@@ -45,6 +47,8 @@ router.post(
   wrapAsync(async (req, res) => {
     const newListing = new Listing(req.body.listing);
     await newListing.save();
+    // 1. Add the flash message
+    req.flash("success", "Listing successfully created!");
     res.redirect("/listings");
   }),
 );
@@ -91,6 +95,9 @@ router.delete(
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     await Listing.findByIdAndDelete(id);
+    // 1. Add the flash message
+    req.flash("error", "Listing successfully deleted!");
+    
     res.redirect("/listings");
   }),
 );

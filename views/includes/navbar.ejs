@@ -1,23 +1,32 @@
 <!-- Ambient Glassmorphism Floating Glow Orbs (Behind content) -->
- <!-- Test -->
- <% if (success.length) { %>
-        <div>
-            <%= success[0] %>
-        </div>
-    <% } %>
-
-    <% if (error.length) { %>
-        <div>
-            <%= error[0] %>
-        </div>
-    <% } %>
-    <!-- Login Name -->
-     <% if (success.length) { %>
-    <div class="alert">
-        <%= success[0] %>
+<!-- Listing addition flash -->
+ <% if (success && success.length > 0) { %>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-3">
+    <div class="flex items-center justify-between px-4 py-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs sm:text-sm backdrop-blur-xl shadow-[0_0_20px_rgba(16,185,129,0.15)] animate-fade-in">
+      <div class="flex items-center gap-2.5">
+        <i class="fa-solid fa-circle-check text-emerald-400"></i>
+        <span><%= success[0] %></span>
+      </div>
+      <button onclick="this.parentElement.parentElement.remove()" class="text-emerald-400/60 hover:text-emerald-300 transition text-xs">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
     </div>
+  </div>
 <% } %>
 
+<% if (error && error.length > 0) { %>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-3">
+    <div class="flex items-center justify-between px-4 py-3 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs sm:text-sm backdrop-blur-xl shadow-[0_0_20px_rgba(244,63,94,0.15)] animate-fade-in">
+      <div class="flex items-center gap-2.5">
+        <i class="fa-solid fa-circle-exclamation text-rose-400"></i>
+        <span><%= error[0] %></span>
+      </div>
+      <button onclick="this.parentElement.parentElement.remove()" class="text-rose-400/60 hover:text-rose-300 transition text-xs">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  </div>
+<% } %>
 <div class="fixed inset-0 pointer-events-none overflow-hidden -z-20">
   <div class="glass-glow-orb orb-pink"></div>
   <div class="glass-glow-orb orb-purple"></div>

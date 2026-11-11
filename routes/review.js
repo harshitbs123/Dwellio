@@ -21,6 +21,9 @@ router.post(
 
     await newReview.save();
     await listing.save();
+    // 1. Add the flash message
+        req.flash("success", "Review successfully created!");
+        
 
     res.redirect(`/listings/${id}`);
   }),
@@ -34,6 +37,8 @@ router.delete(
 
     await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
     await Review.findByIdAndDelete(reviewId);
+    // 1. Add the flash message
+        req.flash("error", "Review successfully created!");
 
     res.redirect(`/listings/${id}`);
   }),
