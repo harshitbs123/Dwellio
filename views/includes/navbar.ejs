@@ -1,4 +1,23 @@
 <!-- Ambient Glassmorphism Floating Glow Orbs (Behind content) -->
+ <!-- Test -->
+ <% if (success.length) { %>
+        <div>
+            <%= success[0] %>
+        </div>
+    <% } %>
+
+    <% if (error.length) { %>
+        <div>
+            <%= error[0] %>
+        </div>
+    <% } %>
+    <!-- Login Name -->
+     <% if (success.length) { %>
+    <div class="alert">
+        <%= success[0] %>
+    </div>
+<% } %>
+
 <div class="fixed inset-0 pointer-events-none overflow-hidden -z-20">
   <div class="glass-glow-orb orb-pink"></div>
   <div class="glass-glow-orb orb-purple"></div>

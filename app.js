@@ -1,9 +1,29 @@
 const express = require("express");
 const app = express();
 const port = 3030;
+const session = require("express-session");
+const flash = require("connect-flash");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const path = require("path");
+// SESSION
+app.use(
+  session({
+    secret: "mysecretstring",
+    resave: false,
+    saveUninitialized: true,
+  }),
+);
+
+// FLASH
+app.use(flash());
+
+// Make flash messages available in all EJS files
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  next();
+});
 
 // Routes
 const listingRoutes = require("./routes/listing");
@@ -42,6 +62,19 @@ app.get(
     res.render("landing.ejs", { listings });
   }),
 );
+// Create flash message
+app.get("/test", (req, res) => {
+  req.flash("success", "Welcome to Dwellio!");
+  res.redirect("/");
+});
+// login
+app.get("/login", (req, res) => {
+  req.session.name = req.query.name;
+
+  req.flash("success", `Hi ${req.session.name}`);
+
+  res.redirect("/");
+});
 
 // Mount Routers
 app.use("/listings", listingRoutes);
