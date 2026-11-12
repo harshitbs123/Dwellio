@@ -6,6 +6,9 @@ const flash = require("connect-flash");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const path = require("path");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./Models/user")
 // SESSION
 app.use(
   session({
@@ -14,6 +17,13 @@ app.use(
     saveUninitialized: true,
   }),
 );
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // FLASH
 app.use(flash());
