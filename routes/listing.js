@@ -5,6 +5,13 @@ const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/ExpressError");
 const session = require("express-session");
 const flash = require("connect-flash");
+const isLoggedIn = (req, res, next) => {
+    if (!req.isAuthenticated()) {
+        req.flash("error", "You must be logged in!");
+        return res.redirect("/login");
+    }
+    next();
+};
 
 // Index: All listings & search
 router.get(
@@ -37,7 +44,7 @@ router.get(
 );
 
 // New: Render host form
-router.get("/host", (req, res) => {
+router.get("/host",isLoggedIn, (req, res) => {
   res.render("listings/host.ejs");
 });
 
@@ -68,7 +75,7 @@ router.get(
 
 // Edit: Render edit form
 router.get(
-  "/:id/edit",
+  "/:id/edit",isLoggedIn,
   wrapAsync(async (req, res, next) => {
     let { id } = req.params;
     const listing = await Listing.findById(id);
@@ -91,7 +98,7 @@ router.patch(
 
 // Delete: Remove listing
 router.delete(
-  "/:id",
+  "/:id",isLoggedIn,
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     await Listing.findByIdAndDelete(id);

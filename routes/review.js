@@ -4,10 +4,17 @@ const Listing = require("../Models/listing");
 const Review = require("../Models/review");
 const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/ExpressError");
+const isLoggedIn = (req, res, next) => {
+    if (!req.isAuthenticated()) {
+        req.flash("error", "You must be logged in!");
+        return res.redirect("/login");
+    }
+    next();
+};
 
 // Create Review: Add review to listing
 router.post(
-  "/",
+  "/",isLoggedIn,
   wrapAsync(async (req, res, next) => {
     const { id } = req.params;
     const listing = await Listing.findById(id);
@@ -31,7 +38,7 @@ router.post(
 
 // Delete Review: Remove review from listing
 router.delete(
-  "/:reviewId",
+  "/:reviewId",isLoggedIn,
   wrapAsync(async (req, res) => {
     let { id, reviewId } = req.params;
 

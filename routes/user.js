@@ -8,59 +8,63 @@ const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/ExpressError");
 
 router.get("/signup", (req, res) => {
-  res.render("users/signup.ejs");
+  if (req.isAuthenticated()) {
+    req.flash("error", "You are already logged in!");
+    res.redirect("/listings")
+  } else res.render("users/signup.ejs");
 });
 
 router.get("/login", (req, res) => {
-  res.render("users/login.ejs");
+  if (req.isAuthenticated()) {
+    req.flash("error", "You are already logged in!");
+  } else res.render("users/login.ejs");
 });
 
 router.post("/signup", async (req, res) => {
-    try {
-        const { username, email, password } = req.body;
+  try {
+    const { username, email, password } = req.body;
 
-        const user = new User({
-            username,
-            email
-        });
+    const user = new User({
+      username,
+      email,
+    });
 
-        const registeredUser = await User.register(user, password);
+    const registeredUser = await User.register(user, password);
 
-        req.login(registeredUser, (err) => {
-            if (err) {
-                req.flash("error", err.message);
-                return next(err);
-            }
-            req.flash("success", "Welcome to Dwellio!");
-            res.redirect("/listings");
-        });
-
-    } catch (err) {
+    req.login(registeredUser, (err) => {
+      if (err) {
         req.flash("error", err.message);
-        res.redirect("/signup");
-    }
+        return next(err);
+      }
+      req.flash("success", "Welcome to Dwellio!");
+      res.redirect("/listings");
+    });
+  } catch (err) {
+    req.flash("error", err.message);
+    res.redirect("/signup");
+  }
 });
 
 router.post(
-    "/login",
-    passport.authenticate("local", {
-        failureRedirect: "/login",
-        failureFlash: true
-    }),
-    (req, res) => {
-        req.flash("success", `Welcome back, ${req.user.username}!`);
-        res.redirect("/listings");
-    }
+  "/login",
+  passport.authenticate("local", {
+    failureRedirect: "/login",
+    failureFlash: true,
+  }),
+  (req, res) => {
+    req.flash("success", `Welcome back, ${req.user.username}!`);
+    res.redirect("/listings");
+  },
 );
 
 router.get("/logout", (req, res, next) => {
-    req.logout((err) => {
-        if (err) {
-            return next(err);
-        }
-        req.flash("success", "You have logged out successfully!");
-        res.redirect("/listings");
-    });
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    req.flash("success", "You have logged out successfully!");
+    res.redirect("/listings");
+  });
 });
 
 module.exports = router;
