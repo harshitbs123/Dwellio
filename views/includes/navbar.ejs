@@ -1,4 +1,5 @@
 <!-- Ambient Glassmorphism Floating Glow Orbs (Behind content) -->
+<% const safeUser = typeof currUser !== 'undefined' ? currUser : null; %>
 <!-- Listing addition flash -->
  <% if (success && success.length > 0) { %>
   <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-3">
@@ -94,14 +95,97 @@
 
     <!-- Right: Minimal Sleek Controls -->
     <div class="flex items-center gap-2">
-      <!-- Become a Host Pill -->
+      <!-- Become a Host Pill (Desktop) -->
       <a
         href="/listings/host"
-        class="px-3.5 py-1.5 rounded-full text-[11px] font-medium text-pink-300 border border-pink-500/30 bg-pink-500/10 hover:bg-pink-500/20 hover:border-pink-500/60 hover:text-white transition duration-200 shadow-[0_0_12px_rgba(255,42,133,0.15)] flex items-center gap-1.5"
+        class="hidden lg:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[11px] font-medium text-pink-300 border border-pink-500/30 bg-pink-500/10 hover:bg-pink-500/20 hover:border-pink-500/60 hover:text-white transition duration-200 shadow-[0_0_12px_rgba(255,42,133,0.15)]"
       >
         <i class="fa-solid fa-sparkles text-[9px] text-pink-400"></i>
         <span>Become a host</span>
       </a>
+
+      <% if (!safeUser) { %>
+        <!-- Auth Box: Log In / Sign Up (Desktop) -->
+        <div class="hidden sm:flex items-center gap-1 p-0.5 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl">
+          <a
+            href="/login"
+            class="px-3 py-1 rounded-full text-[11px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.06] transition"
+          >
+            Log in
+          </a>
+          <a
+            href="/signup"
+            class="px-3.5 py-1 rounded-full text-[11px] font-semibold text-white bg-gradient-to-r from-pink-500 via-rose-500 to-red-500 hover:shadow-[0_0_14px_rgba(255,42,133,0.45)] hover:scale-102 active:scale-98 transition duration-200 shadow-sm"
+          >
+            Sign up
+          </a>
+        </div>
+      <% } else { %>
+        <!-- User Profile Pill & Hover Box (Desktop) -->
+        <div class="relative group">
+          <button
+            type="button"
+            class="flex items-center gap-2 pl-1 pr-3 py-1 rounded-full bg-white/[0.04] border border-white/10 hover:border-pink-500/40 text-white transition duration-200 cursor-pointer shadow-sm group-hover:bg-white/[0.08] group-hover:border-pink-500/50"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <!-- User Avatar Circle -->
+            <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-pink-500 to-rose-400 text-white flex items-center justify-center font-bold text-[10px] shadow-[0_0_10px_rgba(255,42,133,0.5)]">
+              <%= safeUser.username ? safeUser.username.charAt(0).toUpperCase() : "U" %>
+            </div>
+            <span class="text-[11px] font-medium max-w-[90px] truncate"><%= safeUser.username %></span>
+            <i class="fa-solid fa-chevron-down text-[8px] text-zinc-400 group-hover:text-pink-400 group-hover:rotate-180 transition-transform duration-200"></i>
+          </button>
+
+          <!-- Glassmorphic Hover Box -->
+          <div
+            class="absolute right-0 top-full pt-2 w-56 z-50 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 pointer-events-none group-hover:pointer-events-auto"
+          >
+            <div class="rounded-2xl bg-[#08080c]/95 border border-white/10 backdrop-blur-2xl shadow-[0_15px_40px_rgba(0,0,0,0.85),0_0_20px_rgba(255,42,133,0.12)] overflow-hidden">
+              <!-- Signed In As Header -->
+              <div class="px-4 py-3 border-b border-white/[0.06] bg-white/[0.02]">
+                <div class="flex items-center gap-1.5 mb-1">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse"></span>
+                  <span class="text-[10px] uppercase tracking-wider text-emerald-400 font-bold">You are signed in</span>
+                </div>
+                <p class="text-xs font-semibold text-white truncate"><%= safeUser.username %></p>
+                <% if (safeUser.email) { %>
+                  <p class="text-[10px] text-zinc-400 font-light truncate mt-0.5"><%= safeUser.email %></p>
+                <% } %>
+              </div>
+
+              <!-- Menu Actions -->
+              <div class="p-1.5 space-y-0.5 text-xs text-zinc-300">
+                <a
+                  href="/listings/host"
+                  class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-pink-500/10 hover:text-pink-300 transition"
+                >
+                  <i class="fa-solid fa-plus text-[10px] text-pink-400"></i>
+                  <span>Host a Property</span>
+                </a>
+                <a
+                  href="/listings"
+                  class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-pink-500/10 hover:text-pink-300 transition"
+                >
+                  <i class="fa-solid fa-compass text-[10px] text-pink-400"></i>
+                  <span>Explore Stays</span>
+                </a>
+
+                <div class="my-1 border-t border-white/[0.06]"></div>
+
+                <!-- Sign Out -->
+                <a
+                  href="/logout"
+                  class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition font-medium"
+                >
+                  <i class="fa-solid fa-right-from-bracket text-[10px]"></i>
+                  <span>Sign Out</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% } %>
 
       <!-- Apple macOS Glass Theme Toggle (Light / Dark) -->
       <button
@@ -194,6 +278,47 @@
         </span>
         <span class="text-[10px] px-2.5 py-0.5 rounded-full border border-pink-500/30 text-pink-400 theme-badge-text font-medium">macOS Glass</span>
       </button>
+
+      <!-- Mobile Auth Section -->
+      <div class="pt-2 mt-1 border-t border-white/[0.08]">
+        <% if (!safeUser) { %>
+          <div class="grid grid-cols-2 gap-2 pt-1">
+            <a
+              href="/login"
+              class="text-center px-3 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-pink-500/30 text-white text-xs font-medium transition"
+            >
+              Sign In
+            </a>
+            <a
+              href="/signup"
+              class="text-center px-3 py-2.5 rounded-xl bg-gradient-to-r from-pink-500 via-rose-500 to-red-500 text-white text-xs font-semibold shadow-sm hover:shadow-[0_0_15px_rgba(255,42,133,0.4)] transition"
+            >
+              Sign Up
+            </a>
+          </div>
+        <% } else { %>
+          <div class="px-3 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 mb-2">
+            <div class="flex items-center gap-1.5 mb-1">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse"></span>
+              <span class="text-[10px] uppercase tracking-wider text-emerald-400 font-bold">You are signed in</span>
+            </div>
+            <p class="text-xs font-semibold text-white"><%= safeUser.username %></p>
+            <% if (safeUser.email) { %>
+              <p class="text-[10px] text-zinc-400 font-light mt-0.5"><%= safeUser.email %></p>
+            <% } %>
+          </div>
+          <a
+            href="/logout"
+            class="px-3 py-2 rounded-xl text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition flex items-center justify-between font-medium"
+          >
+            <span class="flex items-center gap-2">
+              <i class="fa-solid fa-right-from-bracket text-[10px]"></i>
+              Sign Out
+            </span>
+            <i class="fa-solid fa-arrow-right text-[10px] text-rose-400/50"></i>
+          </a>
+        <% } %>
+      </div>
     </div>
   </div>
 </header>

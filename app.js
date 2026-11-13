@@ -32,12 +32,14 @@ app.use(flash());
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
+  res.locals.currUser = req.user;
   next();
 });
 
 // Routes
 const listingRoutes = require("./routes/listing");
 const reviewRoutes = require("./routes/review");
+const userRoutes = require("./routes/user")
 
 // Models & Error Utilities
 const Listing = require("./Models/listing");
@@ -77,16 +79,9 @@ app.get("/test", (req, res) => {
   req.flash("success", "Welcome to Dwellio!");
   res.redirect("/");
 });
-// login
-app.get("/login", (req, res) => {
-  req.session.name = req.query.name;
-
-  req.flash("success", `Hi ${req.session.name}`);
-
-  res.redirect("/");
-});
 
 // Mount Routers
+app.use("/", userRoutes);
 app.use("/listings", listingRoutes);
 app.use("/listings/:id/reviews", reviewRoutes);
 
