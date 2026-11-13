@@ -46,6 +46,11 @@
                 <i class="fa-solid fa-location-dot text-pink-500 text-[10px]"></i>
                 <span><%= listing.location %>, <%= listing.country %></span>
               </span>
+              <span class="text-zinc-700">·</span>
+              <span class="inline-flex items-center gap-1.5 text-zinc-300 font-light">
+                <i class="fa-solid fa-user-circle text-pink-400 text-xs"></i>
+                <span>Hosted by <strong class="text-pink-300 font-medium">@<%= (listing.owner && listing.owner.username) ? listing.owner.username : "Dwellio Host" %></strong></span>
+              </span>
             </div>
           </div>
 
@@ -104,13 +109,17 @@
             <div class="p-5 rounded-3xl bg-white/[0.02] border border-white/[0.07] backdrop-blur-xl flex items-center justify-between gap-4">
               <div class="flex items-center gap-3.5">
                 <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-500 p-0.5 flex-shrink-0 shadow-[0_0_15px_rgba(255,42,133,0.3)]">
-                  <div class="w-full h-full bg-[#030305] rounded-[14px] flex items-center justify-center text-pink-400 text-lg">
-                    <i class="fa-solid fa-user-shield"></i>
+                  <div class="w-full h-full bg-[#030305] rounded-[14px] flex items-center justify-center text-pink-400 font-bold text-base">
+                    <%= (listing.owner && listing.owner.username) ? listing.owner.username.charAt(0).toUpperCase() : "D" %>
                   </div>
                 </div>
                 <div>
-                  <h2 class="stardom-font text-lg text-white font-light">Hosted by Dwellio Concierge</h2>
-                  <p class="zodiac-font text-xs text-zinc-400 mt-0.5 font-light">Superhost · 5 years hosting · Response rate: 100%</p>
+                  <h2 class="stardom-font text-lg text-white font-light">
+                    Hosted by @<%= (listing.owner && listing.owner.username) ? listing.owner.username : "Dwellio Concierge" %>
+                  </h2>
+                  <p class="zodiac-font text-xs text-zinc-400 mt-0.5 font-light">
+                    <%= (listing.owner && listing.owner.email) ? listing.owner.email : "Superhost · Verified Host" %> · Response rate: 100%
+                  </p>
                 </div>
               </div>
               <span class="hidden sm:inline-flex px-3 py-1 rounded-full text-[11px] font-medium bg-pink-500/10 border border-pink-500/30 text-pink-300">
@@ -340,7 +349,8 @@
               
             </div>
 
-            <!-- HOST ACTIONS: EDIT & DELETE CONTROLS -->
+            <!-- HOST ACTIONS: EDIT & DELETE CONTROLS (Only visible to listing owner) -->
+            <% if (currUser && listing.owner && listing.owner._id.equals(currUser._id)) { %>
             <div class="p-5 rounded-3xl bg-white/[0.02] border border-white/[0.07] backdrop-blur-xl">
               <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <div>
@@ -375,6 +385,7 @@
                 </div>
               </div>
             </div>
+            <% } %>
           </div>
 
           <!-- RIGHT COLUMN: STICKY BOOKING CARD -->

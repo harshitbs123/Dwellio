@@ -156,9 +156,17 @@
                         <%= listing.title %>
                       </h2>
 
-                      <p class="zodiac-font text-xs text-zinc-400 mt-1 flex items-center gap-1.5 font-light">
-                        <i class="fa-solid fa-location-dot text-pink-500 text-[10px]"></i>
-                        <span class="line-clamp-1"><%= listing.location %>, <%= listing.country %></span>
+                      <p class="zodiac-font text-xs text-zinc-400 mt-1 flex items-center justify-between gap-2 font-light">
+                        <span class="flex items-center gap-1.5 line-clamp-1">
+                          <i class="fa-solid fa-location-dot text-pink-500 text-[10px]"></i>
+                          <span><%= listing.location %>, <%= listing.country %></span>
+                        </span>
+                        <% if (listing.owner && listing.owner.username) { %>
+                          <span class="flex-shrink-0 text-[10px] text-pink-400/90 font-medium flex items-center gap-1">
+                            <i class="fa-solid fa-user text-[8px]"></i>
+                            <span><%= listing.owner.username %></span>
+                          </span>
+                        <% } %>
                       </p>
 
                       <p class="zodiac-font text-xs text-zinc-400/80 mt-2 line-clamp-2 font-thin leading-relaxed">

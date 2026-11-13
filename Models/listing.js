@@ -34,6 +34,10 @@ const listSchema = new mongoose.Schema(
         ref: "Review",
       },
     ],
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   { collection: "lists" },
 );

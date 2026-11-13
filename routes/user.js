@@ -7,6 +7,14 @@ const Review = require("../Models/review");
 const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/ExpressError");
 
+// Middleware to preserve the URL user wanted before being sent to login
+const saveRedirectUrl = (req, res, next) => {
+  if (req.session.redirectUrl) {
+    res.locals.redirectUrl = req.session.redirectUrl;
+  }
+  next();
+};
+
 router.get("/signup", (req, res) => {
   if (req.isAuthenticated()) {
     req.flash("error", "You are already logged in!");
@@ -17,10 +25,11 @@ router.get("/signup", (req, res) => {
 router.get("/login", (req, res) => {
   if (req.isAuthenticated()) {
     req.flash("error", "You are already logged in!");
+    res.redirect("/listings")
   } else res.render("users/login.ejs");
 });
 
-router.post("/signup", async (req, res) => {
+router.post("/signup", async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
 
@@ -37,7 +46,9 @@ router.post("/signup", async (req, res) => {
         return next(err);
       }
       req.flash("success", "Welcome to Dwellio!");
-      res.redirect("/listings");
+      let redirectUrl = req.session.redirectUrl || "/listings";
+      delete req.session.redirectUrl;
+      res.redirect(redirectUrl);
     });
   } catch (err) {
     req.flash("error", err.message);
@@ -47,13 +58,15 @@ router.post("/signup", async (req, res) => {
 
 router.post(
   "/login",
+  saveRedirectUrl,
   passport.authenticate("local", {
     failureRedirect: "/login",
     failureFlash: true,
   }),
   (req, res) => {
     req.flash("success", `Welcome back, ${req.user.username}!`);
-    res.redirect("/listings");
+    let redirectUrl = res.locals.redirectUrl || "/listings";
+    res.redirect(redirectUrl);
   },
 );
 

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const data = require("./data.js");
 const Listing = require("../Models/listing.js");
+const User = require("../Models/user.js");
 
 async function main() {
   await mongoose.connect("mongodb://127.0.0.1:27017/rentora");
@@ -18,8 +19,13 @@ main()
 const initDB = async () => {
   try {
     await Listing.deleteMany({});
-    await Listing.insertMany(data.data);
-    console.log("Sample listings data successfully initialized in Dwellio database!");
+    let admin = await User.findOne({ username: "admin" });
+    const initData = data.data.map((obj) => ({
+      ...obj,
+      owner: admin ? admin._id : undefined,
+    }));
+    await Listing.insertMany(initData);
+    console.log("Sample listings data successfully initialized with admin owner in Dwellio database!");
   } catch (e) {
     console.error("Failed to initialize data:", e);
   } finally {

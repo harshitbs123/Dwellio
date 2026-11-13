@@ -67,7 +67,7 @@ app.get(
   wrapAsync(async (req, res) => {
     let listings = [];
     try {
-      listings = await Listing.find();
+      listings = await Listing.find().populate("owner");
     } catch (e) {
       listings = [];
     }

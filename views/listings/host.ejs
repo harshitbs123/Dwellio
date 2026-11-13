@@ -120,9 +120,20 @@
               <!-- RIGHT COLUMN: IMAGE URL & LIVE PREVIEW -->
               <div class="space-y-4">
                 <div>
-                  <label for="image" class="block text-[11px] font-bold uppercase tracking-wider text-pink-400 mb-1.5">
-                    Cover Image URL
-                  </label>
+                  <div class="flex items-center justify-between mb-1.5">
+                    <label for="image" class="block text-[11px] font-bold uppercase tracking-wider text-pink-400">
+                      Cover Image URL
+                    </label>
+                    <a
+                      href="https://unsplash.com/s/photos/hotels"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-1.5 text-[11px] text-pink-400 hover:text-pink-300 transition duration-200 group font-medium"
+                      title="Open Unsplash in a new tab to find hotel and stay photos"
+                    >
+                      
+                    </a>
+                  </div>
                   <input
                     type="url"
                     name="listing[image]"
@@ -131,9 +142,26 @@
                     oninput="updateImagePreview(this.value)"
                     class="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-pink-500/60 focus:bg-zinc-950/70 transition"
                   />
-                  <p class="text-[10px] text-zinc-500 mt-1 zodiac-font font-light">
-                    Direct photo link (leave blank to use default luxury villa image).
-                  </p>
+                  <!-- Unsplash Helper Card -->
+                  <div class="mt-2 p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.07] flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-2.5">
+                      <div class="w-6 h-6 rounded-lg bg-pink-500/10 border border-pink-500/25 flex items-center justify-center text-pink-400 flex-shrink-0">
+                        <i class="fa-brands fa-unsplash text-xs"></i>
+                      </div>
+                      <p class="text-[10px] text-zinc-400 font-light leading-tight">
+                        Need property pictures? Choose free high-resolution photos on Unsplash and paste the link here.
+                      </p>
+                    </div>
+                    <a
+                      href="https://unsplash.com/s/photos/hotels"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-500/15 border border-pink-500/35 text-pink-300 hover:bg-pink-500/25 hover:text-white transition duration-200 text-[10px] font-semibold"
+                    >
+                      <span>Browse</span>
+                      <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i>
+                    </a>
+                  </div>
                 </div>
 
                 <!-- Live Preview Card -->
@@ -142,7 +170,7 @@
                   <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-white/[0.08] bg-zinc-900 flex items-center justify-center shadow-inner">
                     <img
                       id="previewImg"
-                      src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80"
+                      src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
                       alt="Property preview"
                       class="w-full h-full object-cover transition-all duration-300"
                     />
@@ -157,21 +185,21 @@
                     <div class="flex flex-wrap gap-1.5 mt-1">
                       <button
                         type="button"
-                        onclick="setSampleImage('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80')"
+                        onclick="setSampleImage('https://images.unsplash.com/photo-1761158498108-c8190603c7e1?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D')"
                         class="px-2 py-0.5 rounded-md bg-white/[0.03] hover:bg-pink-500/15 text-zinc-300 hover:text-pink-300 border border-white/[0.06] text-[10px] transition cursor-pointer"
                       >
                         Coastal Villa
                       </button>
                       <button
                         type="button"
-                        onclick="setSampleImage('https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1200&q=80')"
+                        onclick="setSampleImage('https://plus.unsplash.com/premium_photo-1755612126261-9157dfccf4da?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D')"
                         class="px-2 py-0.5 rounded-md bg-white/[0.03] hover:bg-pink-500/15 text-zinc-300 hover:text-pink-300 border border-white/[0.06] text-[10px] transition cursor-pointer"
                       >
                         Mountain Chalet
                       </button>
                       <button
                         type="button"
-                        onclick="setSampleImage('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80')"
+                        onclick="setSampleImage('https://plus.unsplash.com/premium_photo-1687960116497-0dc41e1808a2?q=80&w=2342&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D')"
                         class="px-2 py-0.5 rounded-md bg-white/[0.03] hover:bg-pink-500/15 text-zinc-300 hover:text-pink-300 border border-white/[0.06] text-[10px] transition cursor-pointer"
                       >
                         Glamping Resort
