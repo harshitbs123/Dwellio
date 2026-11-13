@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <%- include("includes/head.ejs", { title: "Host Your Property" }) %>
+    <%- include("../includes/head.ejs", { title: "Edit: " + listing.title }) %>
   </head>
   <body class="bg-[#030305] text-white selection:bg-pink-500 selection:text-white">
-    <%- include("includes/navbar.ejs", { active: "host" }) %>
+    <%- include("../includes/navbar.ejs") %>
 
     <div class="relative overflow-hidden min-h-screen">
       <!-- Background ambient glow -->
@@ -13,26 +13,37 @@
       ></div>
 
       <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <!-- BREADCRUMBS -->
+        <nav class="flex items-center space-x-2 text-xs text-zinc-500 mb-5 zodiac-font">
+          <a href="/" class="hover:text-pink-300 transition">Home</a>
+          <span class="text-zinc-700">/</span>
+          <a href="/listings" class="hover:text-pink-300 transition">All Stays</a>
+          <span class="text-zinc-700">/</span>
+          <a href="/listings/<%= listing._id %>" class="hover:text-pink-300 transition truncate max-w-xs"><%= listing.title %></a>
+          <span class="text-zinc-700">/</span>
+          <span class="text-pink-400 font-medium">Edit</span>
+        </nav>
+
         <!-- HEADER -->
         <div class="text-center max-w-xl mx-auto mb-8">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-pink-500/25 bg-pink-500/10 text-pink-300 text-xs font-semibold mb-3 backdrop-blur-xl">
-            <i class="fa-solid fa-sparkles text-[10px] text-pink-400"></i>
-            <span>Dwellio Host Network</span>
+            <i class="fa-solid fa-pen-to-square text-[10px] text-pink-400"></i>
+            <span>Property Management</span>
           </div>
 
           <h1 class="zodiac-font text-3xl sm:text-4xl font-light text-white tracking-tight">
-            Host your property on
+            Edit your listing on
             <span class="stardom-font text-gradient-pink italic font-normal">Dwellio</span>
           </h1>
 
           <p class="zodiac-font text-xs sm:text-sm text-zinc-400 mt-2 font-light leading-relaxed">
-            Welcome travelers from around the world to your architectural villa, mountain chalet, or boutique resort.
+            Update pricing, description, photography, or location for <span class="text-white font-medium">"<%= listing.title %>"</span>.
           </p>
         </div>
 
-        <!-- HOST FORM CONTAINER (MINIMAL GLASS) -->
+        <!-- EDIT FORM CONTAINER (MINIMAL GLASS) -->
         <div class="rounded-3xl bg-white/[0.02] border border-white/[0.08] backdrop-blur-2xl p-6 sm:p-8 shadow-[0_15px_45px_rgba(0,0,0,0.6)]">
-          <form action="/listings" method="POST" class="space-y-5">
+          <form action="/listings/<%= listing._id %>?_method=PATCH" method="POST" class="space-y-5">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
               <!-- LEFT COLUMN: TEXT DETAILS -->
               <div class="space-y-4">
@@ -46,7 +57,8 @@
                     name="listing[title]"
                     id="title"
                     required
-                    placeholder="e.g. Celestial Cove Coastal Villa"
+                    value="<%= listing.title %>"
+                    placeholder="Enter catchy listing title"
                     class="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-pink-500/60 focus:bg-zinc-950/70 transition"
                   />
                 </div>
@@ -62,7 +74,8 @@
                       name="listing[location]"
                       id="location"
                       required
-                      placeholder="e.g. Alibaug, Maharashtra"
+                      value="<%= listing.location %>"
+                      placeholder="Where is it located"
                       class="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-pink-500/60 focus:bg-zinc-950/70 transition"
                     />
                   </div>
@@ -76,7 +89,8 @@
                       name="listing[country]"
                       id="country"
                       required
-                      placeholder="e.g. India"
+                      value="<%= listing.country %>"
+                      placeholder="Enter Country"
                       class="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-pink-500/60 focus:bg-zinc-950/70 transition"
                     />
                   </div>
@@ -95,7 +109,8 @@
                       id="price"
                       min="500"
                       required
-                      placeholder="e.g. 18500"
+                      value="<%= listing.price %>"
+                      placeholder="Price per night"
                       class="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl pl-8 pr-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-pink-500/60 focus:bg-zinc-950/70 transition"
                     />
                   </div>
@@ -111,9 +126,9 @@
                     id="description"
                     rows="4"
                     required
-                    placeholder="Describe what makes your space exceptional, the views, architectural nuances, amenities, and surroundings..."
+                    placeholder="Describe your space..."
                     class="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-pink-500/60 focus:bg-zinc-950/70 transition leading-relaxed resize-y"
-                  ></textarea>
+                  ><%= listing.description %></textarea>
                 </div>
               </div>
 
@@ -127,64 +142,38 @@
                     type="url"
                     name="listing[image]"
                     id="image"
-                    placeholder="https://images.unsplash.com/photo-..."
+                    value="<%= listing.image %>"
+                    placeholder="Enter image URL/Link"
                     oninput="updateImagePreview(this.value)"
                     class="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-pink-500/60 focus:bg-zinc-950/70 transition"
                   />
                   <p class="text-[10px] text-zinc-500 mt-1 zodiac-font font-light">
-                    Direct photo link (leave blank to use default luxury villa image).
+                    Direct photo link to update your listing's primary image.
                   </p>
                 </div>
 
                 <!-- Live Preview Card -->
                 <div>
-                  <span class="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-1.5">Live Photo Preview</span>
+                  <span class="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-1.5">Current Cover Image</span>
                   <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-white/[0.08] bg-zinc-900 flex items-center justify-center shadow-inner">
                     <img
                       id="previewImg"
-                      src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80"
-                      alt="Property preview"
+                      src="<%= listing.image %>"
+                      alt="<%= listing.title %>"
                       class="w-full h-full object-cover transition-all duration-300"
+                      onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80';"
                     />
-                    <div id="previewBadge" class="absolute bottom-2.5 left-2.5 px-2.5 py-0.5 rounded-full text-[9px] font-semibold bg-black/70 backdrop-blur-md text-pink-300 border border-pink-500/30">
+                    <div class="absolute bottom-2.5 left-2.5 px-2.5 py-0.5 rounded-full text-[9px] font-semibold bg-black/70 backdrop-blur-md text-pink-300 border border-pink-500/30">
                       Live Preview
-                    </div>
-                  </div>
-
-                  <!-- Quick Sample Presets -->
-                  <div class="mt-2.5">
-                    <span class="text-[10px] text-zinc-400 font-light zodiac-font">Sample presets:</span>
-                    <div class="flex flex-wrap gap-1.5 mt-1">
-                      <button
-                        type="button"
-                        onclick="setSampleImage('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80')"
-                        class="px-2 py-0.5 rounded-md bg-white/[0.03] hover:bg-pink-500/15 text-zinc-300 hover:text-pink-300 border border-white/[0.06] text-[10px] transition cursor-pointer"
-                      >
-                        Coastal Villa
-                      </button>
-                      <button
-                        type="button"
-                        onclick="setSampleImage('https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1200&q=80')"
-                        class="px-2 py-0.5 rounded-md bg-white/[0.03] hover:bg-pink-500/15 text-zinc-300 hover:text-pink-300 border border-white/[0.06] text-[10px] transition cursor-pointer"
-                      >
-                        Mountain Chalet
-                      </button>
-                      <button
-                        type="button"
-                        onclick="setSampleImage('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80')"
-                        class="px-2 py-0.5 rounded-md bg-white/[0.03] hover:bg-pink-500/15 text-zinc-300 hover:text-pink-300 border border-white/[0.06] text-[10px] transition cursor-pointer"
-                      >
-                        Glamping Resort
-                      </button>
                     </div>
                   </div>
                 </div>
 
-                <!-- Host Protection Strip -->
+                <!-- Host Note -->
                 <div class="p-3.5 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex items-center gap-2.5 text-xs text-zinc-400">
-                  <i class="fa-solid fa-shield-heart text-pink-400 text-lg flex-shrink-0"></i>
+                  <i class="fa-solid fa-clock-rotate-left text-pink-400 text-lg flex-shrink-0"></i>
                   <p class="font-light zodiac-font leading-relaxed text-[11px]">
-                    <strong class="text-white font-medium">Host Protection:</strong> Every host on Dwellio is covered with property damage reassurance and 24/7 priority concierge.
+                    Changes will immediately reflect on the public listing and search catalog across Dwellio.
                   </p>
                 </div>
               </div>
@@ -193,19 +182,19 @@
             <!-- SUBMIT & CANCEL BUTTONS -->
             <div class="pt-5 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-3">
               <a
-                href="/listings"
+                href="/listings/<%= listing._id %>"
                 class="text-xs text-zinc-400 hover:text-white transition flex items-center gap-1.5 zodiac-font font-light"
               >
                 <i class="fa-solid fa-arrow-left text-[9px]"></i>
-                <span>Cancel and return</span>
+                <span>Cancel changes</span>
               </a>
 
               <button
                 type="submit"
                 class="w-full sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-red-500 text-white font-bold text-xs tracking-wide shadow-[0_0_20px_rgba(255,42,133,0.45)] hover:shadow-[0_0_30px_rgba(255,42,133,0.7)] hover:scale-102 active:scale-98 transition cursor-pointer flex items-center justify-center gap-2"
               >
-                <i class="fa-solid fa-cloud-arrow-up text-[11px]"></i>
-                <span>Publish Listing on Dwellio</span>
+                <i class="fa-solid fa-check text-[11px]"></i>
+                <span>Save and Update Info</span>
               </button>
             </div>
           </form>
@@ -221,18 +210,10 @@
           img.onerror = () => {
             img.src = "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80";
           };
-        } else {
-          img.src = "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80";
         }
-      }
-
-      function setSampleImage(url) {
-        const input = document.getElementById("image");
-        input.value = url;
-        updateImagePreview(url);
       }
     </script>
 
-    <%- include("includes/footer.ejs") %>
+    <%- include("../includes/footer.ejs") %>
   </body>
 </html>

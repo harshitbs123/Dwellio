@@ -8,11 +8,11 @@ const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/ExpressError");
 
 router.get("/signup", (req, res) => {
-  res.render("signup.ejs");
+  res.render("users/signup.ejs");
 });
 
 router.get("/login", (req, res) => {
-  res.render("login.ejs");
+  res.render("users/login.ejs");
 });
 
 router.post("/signup", async (req, res) => {

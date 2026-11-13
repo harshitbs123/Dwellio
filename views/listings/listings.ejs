@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <%- include("includes/head.ejs", { title: "Explore All Stays" }) %>
+    <%- include("../includes/head.ejs", { title: "Explore All Stays" }) %>
   </head>
   <body class="bg-[#030305] text-white selection:bg-pink-500 selection:text-white">
     <% const safeSearch = typeof search !== 'undefined' ? search : ''; var search = safeSearch; const safeListings = typeof listings !== 'undefined' ? listings : []; var listings = safeListings; %>
-    <%- include("includes/navbar.ejs", { active: "listings" }) %>
+    <%- include("../includes/navbar.ejs", { active: "listings" }) %>
 
     <div class="relative overflow-hidden min-h-screen">
       <!-- Background ambient glow -->
@@ -214,6 +214,6 @@
       </main>
     </div>
 
-    <%- include("includes/footer.ejs") %>
+    <%- include("../includes/footer.ejs") %>
   </body>
 </html>

@@ -93,8 +93,8 @@ app.use((req, res, next) => {
 // Central Error Handler
 app.use((err, req, res, next) => {
   let { status = 500, message = "Something went wrong!" } = err;
-  if (err.name === "CastError") return res.status(404).render("404Cast.ejs");
-  if (status === 404) return res.status(404).render("404.ejs");
+  if (err.name === "CastError") return res.status(404).render("errors/404Cast.ejs");
+  if (status === 404) return res.status(404).render("errors/404.ejs");
   res.status(status).send(message);
 });
 

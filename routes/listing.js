@@ -32,13 +32,13 @@ router.get(
       listings = [];
     }
 
-    res.render("listings.ejs", { listings, search: search || "" });
+    res.render("listings/listings.ejs", { listings, search: search || "" });
   }),
 );
 
 // New: Render host form
 router.get("/host", (req, res) => {
-  res.render("host.ejs");
+  res.render("listings/host.ejs");
 });
 
 // Create: Add new listing
@@ -62,7 +62,7 @@ router.get(
     if (!listing) {
       return next(new ExpressError(404, "Listing Not Found"));
     }
-    res.render("show.ejs", { listing });
+    res.render("listings/show.ejs", { listing });
   }),
 );
 
@@ -75,7 +75,7 @@ router.get(
     if (!listing) {
       return next(new ExpressError(404, "Listing Not Found"));
     }
-    res.render("edit.ejs", { listing });
+    res.render("listings/edit.ejs", { listing });
   }),
 );
 
